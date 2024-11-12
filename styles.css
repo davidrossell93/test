@@ -203,3 +203,109 @@ p {
     left: 0;
     z-index: 0;
 }
+
+/* Tarjeta de perfil */
+.profile-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px) brightness(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 420px; /* Aumenta el tamaño máximo de la tarjeta */
+    text-align: center;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor de la imagen de perfil con indicador */
+.profile-pic-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic {
+    width: 180px; /* Aumenta el tamaño de la imagen de perfil */
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Indicador de estado de conexión */
+.status-indicator {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #4caf50;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    bottom: 5px;
+    right: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor del nombre con el peón */
+.username-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Estilo mejorado para el nombre con borde morado o rosado */
+.username {
+    font-size: 44px; /* Aumenta el tamaño del nombre */
+    font-weight: bold;
+    color: #ffe066; /* Amarillo para el texto */
+    font-family: 'Pacifico', cursive;
+    margin-top: 15px;
+    -webkit-text-stroke: 1px #a64ca6; /* Borde morado oscuro */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4), 0px 0px 15px rgba(204, 153, 255, 0.7); /* Sombra más visible */
+}
+
+/* ID del usuario con sombra negra intensa */
+.user-id {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+    font-style: italic;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 1); /* Sombra negra intensa */
+}
+
+/* Iconos en la parte inferior */
+.bottom-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.icon {
+    font-size: 28px; /* Aumenta el tamaño de los iconos */
+    transition: transform 0.2s, color 0.3s;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.icon.flag { 
+    width: 28px; 
+    height: auto; 
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+/* Estilo de la mariposa junto al nombre */
+.butterfly {
+    color: #a64ca6; /* Morado para la mariposa */
+    font-size: 32px;
+    vertical-align: middle;
+    margin-left: 8px; /* Espacio entre el nombre y la mariposa */
+}
