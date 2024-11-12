@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil David</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace a CSS externo -->
+</head>
+<body>
+
+<audio id="autoplayAudio" autoplay loop style="display:none;">
+  <source src="https://raw.githubusercontent.com/davidrossell93/xatspace/main/eminem.mp3" type="audio/mpeg">
+  Tu navegador no soporta la reproducción de audio.
+</audio>
+
+<!-- Contenedor de partículas -->
+<div id="particles-js"></div>
+
+<!-- Contenedor del perfil -->
+    <div class="profile-container" role="region" aria-label="Perfil de usuario">
+        <img id="profileImage" src="https://xatimg.com/image/9yQ3tlf8wtqx.jpg" alt="Mi Foto" aria-describedby="profileDesc">
+        <h1>David Rossell</h1>
+        <p id="profileDesc">ID: xat1548951976</p>
+</div>
+
+    <!-- Imagen ampliada -->
+    <div id="fullScreenContainer" class="full-screen" role="dialog" aria-modal="true">
+        <button class="close-button" aria-label="Cerrar imagen ampliada">&times;</button>
+        <img id="fullScreenImage" src="https://xatimg.com/image/9yQ3tlf8wtqx.jpg" alt="Mi Foto Completa">
+    </div>
+</div>
+
+<!-- Contenedor de iconos -->
+<div class="icon-container">
+    <div class="icon icon-espana" title="España"></div>
+    <div class="icon icon-piscis" title="Piscis">♓</div>
+    <div class="icon icon-playstation" title="Me gusta jugar">🎮</div>
+    <div class="icon icon-gym" title="Voy al gym">🏋️</div>
+    <div class="icon icon-twitter" title="Twitter">🐦</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="script.js"></script> <!-- Enlace a JavaScript externo -->
+</body>
+</html>

@@ -1,0 +1,239 @@
+body {
+    background-color: #1e1e1e; /* Fondo oscuro inicial */
+    transition: background-color 2s ease; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewport="0 0 30 40" style="fill:none;stroke:red;stroke-width:2;"><polygon points="0,0 25,20 15,20 20,40 10,30 5,35" fill="red" opacity="0.9" stroke="black" stroke-width="1"/></svg>') 0 0, auto;
+}
+
+
+/* Contenedor para la imagen y tooltip */
+.image-container {
+    position: relative; /* Necesario para que el tooltip esté posicionado en relación a la imagen */
+    display: inline-block;
+}
+
+/* Estilo para el tooltip flotante */
+.tooltip {
+    position: absolute;
+    bottom: 10px; /* Justo debajo de la imagen */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Centra el tooltip perfectamente */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+    color: white; /* Texto blanco para contraste */
+    padding: 5px 10px; /* Espaciado interno del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 0.8em; /* Tamaño de fuente pequeño y discreto */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.3s ease-in-out; /* Suaviza la aparición */
+    pointer-events: none; /* El tooltip no bloqueará los clics */
+}
+
+/* Muestra el tooltip al hacer hover en la imagen */
+.image-container:hover .tooltip {
+    opacity: 1; /* Hace que el tooltip sea visible */
+}
+
+/* Animación de partículas en el fondo */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.profile-container {
+    background-color: rgba(10, 10, 10, 0.9); /* Fondo muy oscuro */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(200, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.6); /* Sombra roja */
+    padding: 20px;
+    text-align: center;
+    width: 320px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    animation: fadeIn 2s ease;
+    background-image: radial-gradient(circle at top left, rgba(100, 0, 0, 0.2), transparent),
+                      radial-gradient(circle at bottom right, rgba(100, 0, 0, 0.2), transparent);
+    background-blend-mode: overlay;
+}
+
+/* Puedes añadir un parpadeo suave para el fondo "sangriento" */
+@keyframes bloodPulse {
+    0%, 100% { box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3), 0 0 30px rgba(255, 0, 0, 0.5); }
+    50% { box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6), 0 0 45px rgba(255, 0, 0, 0.7); }
+}
+
+.profile-container {
+    animation: bloodPulse 3s infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-container img {
+    width: 100%; /* Ajusta para ocupar todo el contenedor */
+    height: auto;
+    object-fit: cover;
+    border: 3px solid transparent; /* Borde transparente para usar el degradado como borde */
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    left: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(100, 0, 0, 0.8); /* Sombra oscura */
+    border-radius: 5px; /* Borde ligeramente redondeado */
+    background-image: radial-gradient(circle, rgba(153, 0, 0, 0.6), transparent 70%);
+    background-origin: border-box;
+    padding: 10px;
+     clip-path: polygon(5% 5%, 90% 10%, 95% 90%, 10% 85%); /* Contorno irregular en la imagen */
+}
+
+.profile-container img::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    left: -10px;
+    border: 3px solid rgba(153, 0, 0, 0.7); /* Borde rojo oscuro */
+    box-shadow: 0 0 15px rgba(153, 0, 0, 0.8), 0 0 30px rgba(51, 0, 0, 0.6);
+    border-radius: 5px;
+    animation: flicker 1.5s infinite alternate; /* Efecto de parpadeo */
+}
+
+@keyframes flicker {
+    0% {
+        box-shadow: 0 0 20px rgba(153, 0, 0, 0.7), 0 0 30px rgba(51, 0, 0, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(255, 0, 0, 0.9), 0 0 40px rgba(153, 0, 0, 0.6);
+    }
+}
+
+.profile-container img.clicked {
+    border: 2px solid #ffcc00; 
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); 
+}
+
+/* Estilo para la imagen en pantalla completa (ampliada) */
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo más oscuro */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    /* cursor: pointer; */
+}
+/* cursor: inherit; */
+
+/* Contenedor de las partículas en pantalla completa */
+#particles-fullscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Asegúrate de que esté detrás de la imagen */
+}
+
+/* Estilo para la imagen en pantalla completa (ampliada) */
+.full-screen img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: cover; /* Ajusta la imagen sin distorsionar */
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Sombra suave para profundidad */
+    transition: transform 0.3s ease, border-radius 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    pointer-events: none; /* Evita interacción directa con la imagen */
+
+    /* Bordes blancos con animación parpadeante */
+    border: 5px solid transparent; /* Borde inicialmente transparente */
+    background: linear-gradient(white, white), 
+                linear-gradient(45deg, #ffffff, #f0f0f0); /* Gradiente blanco */
+    background-origin: border-box;
+    background-clip: content-box, border-box; /* Ajusta el borde */
+    animation: borderGlow 2s infinite; /* Animación de parpadeo */
+    z-index: 1; /* Asegura que la imagen esté por encima del fondo */
+    position: relative; /* Necesario para que el z-index funcione */
+}
+
+/* Animación de parpadeo del borde blanco */
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 
+                    0 0 30px rgba(255, 255, 255, 0.4), 
+                    0 0 45px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 
+                    0 0 40px rgba(255, 255, 255, 0.6), 
+                    0 0 60px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 
+                    0 0 30px rgba(255, 255, 255, 0.4), 
+                    0 0 45px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Efecto de zoom suave al hacer hover en la imagen ampliada */
+.full-screen img:hover {
+    transform: scale(1.03); /* Zoom suave */
+}
+
+/* Botón de cerrar imagen ampliada */
+.close-button {
+    position: absolute;
+    top: 35px; /* Ajustado para estar más cerca del borde superior de la imagen */
+    right: 10px; /* Ajustado para estar más cerca del borde derecho de la imagen */
+    background-color: #ff3b30;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: background-color 0.3s ease;
+    z-index: 1001;
+}
+
+.close-button:hover {
+    background-color: #ff1f20;
+}
+
+h1 {
+    font-size: 1.5em;
+    color: #333; 
+}
+
+p {
+    color: #555; 
+    margin-top: 10px;
+}
+
+
+/* Asegúrate de incluir este bloque de partículas en el contenedor de imagen ampliada */
+.full-screen #particles-fullscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Asegúrate de que esté detrás de la imagen */
+} 

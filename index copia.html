@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- This HTML file represents the structure of our website -->
+<head>
+<!-- The head tag contains meta-information about the HTML document -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil David</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace a CSS externo -->
+</head>
+<body>
+<!-- The body tag contains the content that will be displayed on the website -->
+
+<audio id="autoplayAudio" autoplay loop style="display:none;">
+  <source src="https://raw.githubusercontent.com/davidrossell93/xatspace/main/eminem.mp3" type="audio/mpeg">
+  Tu navegador no soporta la reproducción de audio.
+</audio>
+
+<!-- Contenedor de partículas -->
+<div id="particles-js"></div>
+
+<!-- Contenedor del perfil -->
+<div class="profile-container" role="region" aria-label="User Profile">
+    <div class="image-container"> <!-- Nueva clase para el contenedor de la imagen -->
+<img id="profileImage" src="https://xatimg.com/image/lFbqCpmREUuO.jpg" alt="My Picture" aria-describedby="profileDesc">
+        <div class="tooltip">Toca para ampliar</div> <!-- Tooltip para la ampliación -->
+    </div>
+</div>
+
+<!-- Imagen ampliada -->
+<div id="fullScreenContainer" class="full-screen">
+    <div id="particles-fullscreen"></div> <!-- Contenedor de partículas para pantalla completa -->
+    <img id="profileImageLarge" src="https://xatimg.com/image/qXeV7xGxuh8V.jpg" alt="Perfil">
+    <button class="close-button">✖</button>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="script.js"></script> <!-- Enlace a JavaScript externo -->
+</body>
+</html>
+
