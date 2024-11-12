@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'flex'; 
         profileImage.classList.toggle('clicked');
         playClickSound(); 
-        // Inicializa partículas para la imagen ampliada
         initFullScreenParticles();
     });
 
@@ -57,11 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
         particles: {
-            number: {
-                value: 100,
-                density: { enable: true, value_area: 700 }
+            number: { value: 100, density: { enable: true, value_area: 700 } },
+            color: {
+                value: ["#000000", "#6a0dad"], // Negro y violeta
             },
-            color: { value: '#660000' }, // Rojo oscuro para partículas
             shape: {
                 type: 'circle',
                 stroke: { width: 0, color: '#000000' }
@@ -69,22 +67,28 @@ document.addEventListener('DOMContentLoaded', function() {
             opacity: {
                 value: 0.5,
                 random: true,
+                anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
             },
             size: {
                 value: 3,
                 random: true,
+                anim: { enable: true, speed: 3, size_min: 0.1, sync: false }
             },
             line_linked: {
                 enable: true,
-                distance: 180,
-                color: '#550000', // Enlace rojo oscuro
+                distance: 150,
+                color: "#6a0dad", // Color violeta para los enlaces
                 opacity: 0.6,
                 width: 1
             },
             move: {
                 enable: true,
-                speed: 2,
+                speed: 1.5,
                 direction: 'none',
+                random: true,
+                straight: false,
+                out_mode: "out",
+                attract: { enable: false }
             }
         },
         interactivity: {
@@ -102,11 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function initFullScreenParticles() {
         particlesJS('particles-fullscreen', {
             particles: {
-                number: {
-                    value: 100,
-                    density: { enable: true, value_area: 700 }
+                number: { value: 100, density: { enable: true, value_area: 700 } },
+                color: {
+                    value: ["#000000", "#6a0dad"], // Negro y violeta
                 },
-                color: { value: '#660000' }, // Rojo oscuro para partículas
                 shape: {
                     type: 'circle',
                     stroke: { width: 0, color: '#000000' }
@@ -114,22 +117,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 opacity: {
                     value: 0.5,
                     random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
                 },
                 size: {
                     value: 3,
                     random: true,
+                    anim: { enable: true, speed: 3, size_min: 0.1, sync: false }
                 },
                 line_linked: {
                     enable: true,
-                    distance: 180,
-                    color: '#550000', // Enlace rojo oscuro
+                    distance: 150,
+                    color: "#6a0dad", // Color violeta para los enlaces
                     opacity: 0.6,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 2,
+                    speed: 1.5,
                     direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    attract: { enable: false }
                 }
             },
             interactivity: {
@@ -142,15 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             retina_detect: true
         });
-    }
-
-    // Función para interpolar entre dos colores
-    function interpolateColor(color1, color2, factor) {
-        const result = color1.slice(); // Copiar el primer color
-        for (let i = 0; i < 3; i++) {
-            result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
-        }
-        return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
     }
 
     // Cambiar el fondo de forma cíclica
