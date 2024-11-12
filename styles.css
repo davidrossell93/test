@@ -20,19 +20,16 @@ body {
 
 /* Estilo para el tooltip flotante */
 .tooltip {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8em;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px) brightness(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 420px; /* Aumenta el tamaño máximo de la tarjeta */
+    text-align: center;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .image-container:hover .tooltip {
