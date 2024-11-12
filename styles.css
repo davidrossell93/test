@@ -1,35 +1,33 @@
 /* Fondo del body */
 body {
     background-color: #0d0d0d;
-    transition: background-color 2s ease;
+    margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    margin: 0;
+    overflow: hidden;
     color: #fff;
 }
 
-/* Tarjeta de perfil principal */
+/* Tarjeta de perfil única */
 .profile-container {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px) brightness(1.2);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 25px;
-    padding: 40px 30px;
+    padding: 30px;
     width: 90%;
-    max-width: 320px; /* Ajuste del tamaño */
+    max-width: 320px;
     text-align: center;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 1;
-    overflow: hidden;
     animation: fadeIn 2s ease;
 }
 
-/* Imagen redonda de perfil */
+/* Imagen de perfil redonda con efecto de ampliación */
 .profile-pic-container {
     position: relative;
     display: inline-block;
@@ -37,16 +35,17 @@ body {
 }
 
 .profile-pic {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 3px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease; /* Efecto de zoom */
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .profile-pic:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.05);
 }
 
 /* Nombre de usuario y mariposa */
@@ -58,25 +57,22 @@ body {
 }
 
 .username {
-    font-size: 44px;
+    font-size: 32px;
     font-weight: bold;
     color: #ffe066;
     font-family: 'Pacifico', cursive;
-    margin-top: 15px;
     -webkit-text-stroke: 1px #a64ca6;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4), 0px 0px 15px rgba(204, 153, 255, 0.7);
 }
 
-/* ID del usuario */
 .user-id {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 20px;
     font-style: italic;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
 }
 
-/* Iconos inferiores */
+/* Iconos */
 .bottom-icons {
     display: flex;
     justify-content: center;
@@ -94,16 +90,59 @@ body {
     transform: scale(1.2);
 }
 
-/* Estilo de la mariposa */
-.butterfly {
-    color: #a64ca6;
-    font-size: 32px;
-    vertical-align: middle;
-    margin-left: 8px;
+/* Contenedor para la imagen ampliada */
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
-/* Efecto de entrada */
+.full-screen img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    border: 5px solid rgba(200, 0, 0, 0.8);
+}
+
+/* Botón para cerrar la imagen ampliada */
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff3b30;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+.close-button:hover {
+    background-color: #ff1f20;
+}
+
+/* Animación de fadeIn */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Partículas */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
