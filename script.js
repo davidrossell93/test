@@ -153,33 +153,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cambiar el fondo de forma cíclica
+    // Cambiar el fondo de forma gradual entre negro y violeta
+    let color1 = [0, 0, 0];     // Negro
+    let color2 = [106, 13, 173]; // Violeta bonito (#6a0dad)
     let currentIndex = 0;
-    let colors = [
-        [10, 10, 10],     // Negro oscuro
-        [55, 0, 0],       // Rojo oscuro
-        [34, 34, 34],     // Gris oscuro
-        [102, 0, 0],      // Burdeos profundo
-        [30, 0, 0]        // Marrón muy oscuro
-    ];
+    const steps = 100; // Número de pasos en la transición
+
+    function interpolateColor(colorA, colorB, factor) {
+        const result = colorA.slice();
+        for (let i = 0; i < 3; i++) {
+            result[i] = Math.round(result[i] + factor * (colorB[i] - colorA[i]));
+        }
+        return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
+    }
 
     function changeBackgroundColor() {
-        const nextIndex = (currentIndex + 1) % colors.length;
         let step = 0;
-        const steps = 100;
 
         const interval = setInterval(() => {
-            const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
+            const color = interpolateColor(color1, color2, step / steps);
             document.body.style.backgroundColor = color;
             step++;
 
             if (step > steps) {
-                clearInterval(interval);
-                currentIndex = nextIndex;
+                // Intercambiar colores y reiniciar el paso
+                const temp = color1;
+                color1 = color2;
+                color2 = temp;
+                step = 0;
             }
-        }, 20);
+        }, 50); // Cambia el fondo cada 50ms para hacer la transición suave
     }
 
-    // Cambia el fondo cada 7 segundos
-    setInterval(changeBackgroundColor, 7000);
+    // Iniciar el cambio de color de fondo
+    changeBackgroundColor();
 });
