@@ -98,19 +98,21 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
+/* Imagen dentro del contenedor de pantalla completa */
 .full-screen img {
     max-width: 90%;
     max-height: 90%;
-    object-fit: cover;
+    object-fit: contain; /* Cambiado a 'contain' para asegurar proporciones */
     border-radius: 25px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 5px solid rgba(200, 0, 0, 0.8);
+    margin: auto; /* Centrando la imagen dentro del contenedor */
 }
 
 /* Botón para cerrar la imagen ampliada */
