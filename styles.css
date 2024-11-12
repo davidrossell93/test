@@ -1,185 +1,148 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const audio = document.getElementById("autoplayAudio");
+/* Fondo del body */
+body {
+    background-color: #0d0d0d;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    color: #fff;
+}
 
-    // Función para intentar reproducir el audio
-    const tryAutoPlay = () => {
-        audio.play().then(() => {
-            console.log('Reproducción automática exitosa');
-            removeInteractionEvents(); 
-        }).catch(error => {
-            console.log('Reproducción automática bloqueada', error);
-        });
-    };
+/* Tarjeta de perfil única */
+.profile-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px) brightness(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    padding: 30px;
+    width: 90%;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 2s ease;
+}
 
-    // Eventos de interacción
-    const addInteractionEvents = () => {
-        document.addEventListener('click', tryAutoPlay);
-        document.addEventListener('touchstart', tryAutoPlay);
-    };
+/* Imagen de perfil redonda con efecto de ampliación */
+.profile-pic-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
 
-    const removeInteractionEvents = () => {
-        document.removeEventListener('click', tryAutoPlay);
-        document.removeEventListener('touchstart', tryAutoPlay);
-    };
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-    addInteractionEvents();
+.profile-pic:hover {
+    transform: scale(1.05);
+}
 
-    // Manejo de la imagen ampliada
-    const profileImage = document.getElementById('profileImage');
-    const fullScreenContainer = document.getElementById('fullScreenContainer');
-    const closeButton = document.querySelector('.close-button');
+/* Nombre de usuario y mariposa */
+.username-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
 
-    profileImage.addEventListener('click', () => {
-        fullScreenContainer.style.display = 'flex'; 
-        profileImage.classList.toggle('clicked');
-        playClickSound(); 
-        initFullScreenParticles();
-    });
+.username {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffe066;
+    font-family: 'Pacifico', cursive;
+    -webkit-text-stroke: 1px #a64ca6;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4), 0px 0px 15px rgba(204, 153, 255, 0.7);
+}
 
-    function playClickSound() {
-        const clickSound = new Audio('https://raw.githubusercontent.com/davidrossell93/xatspace/main/ampliada.mp3');
-        clickSound.play();
-    }
+.user-id {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+}
 
-    closeButton.addEventListener('click', () => {
-        fullScreenContainer.style.display = 'none'; 
-        profileImage.classList.remove('clicked'); 
-    });
+/* Iconos */
+.bottom-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
 
-    fullScreenContainer.addEventListener('click', (event) => {
-        if (event.target === fullScreenContainer) { 
-            fullScreenContainer.style.display = 'none'; 
-            profileImage.classList.remove('clicked'); 
-        }
-    });
+.icon {
+    font-size: 28px;
+    transition: transform 0.2s, color 0.3s;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
+}
 
-    // Configuración de partículas para el fondo principal
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: {
-                value: ["#000000", "#6a0dad"], // Negro y violeta
-            },
-            shape: {
-                type: 'circle',
-                stroke: { width: 0, color: '#000000' }
-            },
-            opacity: {
-                value: 0.5,
-                random: true,
-                anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-            },
-            size: {
-                value: 3,
-                random: true,
-                anim: { enable: true, speed: 3, size_min: 0.1, sync: false }
-            },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: "#6a0dad", // Color violeta para los enlaces
-                opacity: 0.6,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 1.5,
-                direction: 'none',
-                random: true,
-                straight: false,
-                out_mode: "out",
-                attract: { enable: false }
-            }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: {
-                onhover: { enable: true, mode: 'repulse' },
-                onclick: { enable: true, mode: 'push' },
-                resize: true
-            }
-        },
-        retina_detect: true
-    });
+.icon:hover {
+    transform: scale(1.2);
+}
 
-    // Inicializa partículas para la imagen ampliada con los mismos colores
-    function initFullScreenParticles() {
-        particlesJS('particles-fullscreen', {
-            particles: {
-                number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: {
-                    value: ["#000000", "#6a0dad"], // Negro y violeta
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: { width: 0, color: '#000000' }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: { enable: true, speed: 3, size_min: 0.1, sync: false }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#6a0dad", // Color violeta para los enlaces
-                    opacity: 0.6,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 1.5,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    attract: { enable: false }
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        });
-    }
+/* Contenedor para la imagen ampliada */
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
 
-    // Cambiar el fondo de forma cíclica
-    let currentIndex = 0;
-    let colors = [
-        [10, 10, 10],     // Negro oscuro
-        [55, 0, 0],       // Rojo oscuro
-        [34, 34, 34],     // Gris oscuro
-        [102, 0, 0],      // Burdeos profundo
-        [30, 0, 0]        // Marrón muy oscuro
-    ];
+.full-screen img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    border: 5px solid rgba(200, 0, 0, 0.8);
+}
 
-    function changeBackgroundColor() {
-        const nextIndex = (currentIndex + 1) % colors.length;
-        let step = 0;
-        const steps = 100;
+/* Botón para cerrar la imagen ampliada */
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff3b30;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+}
 
-        const interval = setInterval(() => {
-            const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
-            document.body.style.backgroundColor = color;
-            step++;
+.close-button:hover {
+    background-color: #ff1f20;
+}
 
-            if (step > steps) {
-                clearInterval(interval);
-                currentIndex = nextIndex;
-            }
-        }, 20);
-    }
+/* Animación de fadeIn */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    // Cambia el fondo cada 7 segundos
-    setInterval(changeBackgroundColor, 7000);
-});
+/* Partículas */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
