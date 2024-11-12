@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="background-gradient"></div>
+    <div id="particles-js"></div>
 
-    <!-- Tarjeta de perfil combinada -->
+    <!-- Tarjeta de perfil única -->
     <div class="profile-container">
         <div class="profile-pic-container">
-            <img src="https://xatimg.com/image/0gaJfPKlUpjI.png" alt="Foto de Perfil" class="profile-pic">
+            <img src="https://xatimg.com/image/0gaJfPKlUpjI.png" alt="Foto de Perfil" class="profile-pic" id="profileImage">
         </div>
         
         <div class="username-container">
@@ -27,6 +27,18 @@
             <span class="icon star">⭐️</span>
         </div>
     </div>
+
+    <!-- Contenedor de la imagen en pantalla completa -->
+    <div id="fullScreenContainer" class="full-screen">
+        <div id="particles-fullscreen"></div>
+        <img id="profileImageLarge" src="https://xatimg.com/image/0gaJfPKlUpjI.png" alt="Perfil Ampliado">
+        <button class="close-button">✖</button>
+    </div>
+
+    <audio id="autoplayAudio" autoplay loop style="display:none;">
+        <source src="https://raw.githubusercontent.com/davidrossell93/xatspace/main/eminem.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
