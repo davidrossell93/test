@@ -115,7 +115,7 @@ body {
 
 /* Botón para cerrar la imagen ampliada */
 .close-button {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     background-color: #ff3b30;
