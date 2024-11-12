@@ -1,68 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- This HTML file represents the structure of our website -->
 <head>
-<!-- The head tag contains meta-information about the HTML document -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil David</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Enlace a CSS externo -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-        <!-- Fondo de la página -->
     <div class="background-gradient"></div>
 
-    <!-- Tarjeta de perfil mejorada -->
-    <div class="profile-card">
-        
-        <!-- Contenedor de la foto de perfil con indicador de estado -->
+    <!-- Tarjeta de perfil combinada -->
+    <div class="profile-container">
         <div class="profile-pic-container">
             <img src="https://xatimg.com/image/0gaJfPKlUpjI.png" alt="Foto de Perfil" class="profile-pic">
         </div>
-
-        <!-- Contenedor del nombre con peón -->
-<div class="username-container">
-    <h1 class="username">Rain <span class="butterfly">🦋</span></h1>
-</div>
-
-        <!-- ID del usuario -->
+        
+        <div class="username-container">
+            <h1 class="username">Rain <span class="butterfly">🦋</span></h1>
+        </div>
+        
         <p class="user-id">@raincloud07</p>
 
-        <!-- Iconos en lugar de corazones -->
         <div class="bottom-icons">
-            <span class="icon bandera">🇨🇱</span> <!-- Símbolo de bandera -->
-            <span class="icon horoscopo">♉️</span> <!-- Símbolo de horóscopo -->
-            <span class="icon star">⭐️</span> <!-- Icono de estrella -->
+            <span class="icon bandera">🇨🇱</span>
+            <span class="icon horoscopo">♉️</span>
+            <span class="icon star">⭐️</span>
         </div>
     </div>
-<!-- The body tag contains the content that will be displayed on the website -->
 
-<audio id="autoplayAudio" autoplay loop style="display:none;">
-  <source src="https://raw.githubusercontent.com/davidrossell93/xatspace/main/eminem.mp3" type="audio/mpeg">
-  Tu navegador no soporta la reproducción de audio.
-</audio>
-
-<!-- Contenedor de partículas -->
-<div id="particles-js"></div>
-
-<!-- Contenedor del perfil -->
-<div class="profile-container" role="region" aria-label="User Profile">
-    <div class="image-container"> <!-- Nueva clase para el contenedor de la imagen -->
-<img id="profileImage" src="https://xatimg.com/image/JNhD3HfkfRVR.png" alt="My Picture" aria-describedby="profileDesc">
-        <div class="tooltip">Toca para ampliar</div> <!-- Tooltip para la ampliación -->
-    </div>
-</div>
-
-<!-- Imagen ampliada -->
-<div id="fullScreenContainer" class="full-screen">
-    <div id="particles-fullscreen"></div> <!-- Contenedor de partículas para pantalla completa -->
-    <img id="profileImageLarge" src="https://xatimg.com/image/AwBgFYp15gFs.jpg" alt="Perfil">
-    <button class="close-button">✖</button>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script src="script.js"></script> <!-- Enlace a JavaScript externo -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
