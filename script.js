@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const audio = document.getElementById("autoplayAudio");
+    const profileImage = document.getElementById('profileImage');
+    const fullScreenContainer = document.getElementById('fullScreenContainer');
 
     // Función para intentar reproducir el audio
     const tryAutoPlay = () => {
@@ -24,29 +26,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     addInteractionEvents();
 
-    // Manejo de la imagen ampliada
-    const profileImage = document.getElementById('profileImage');
-    const fullScreenContainer = document.getElementById('fullScreenContainer');
-
     // Muestra la imagen ampliada al hacer clic en la imagen de perfil
     profileImage.addEventListener('click', () => {
         fullScreenContainer.style.display = 'flex'; // Muestra el contenedor de pantalla completa
-        playClickSound();
-        initFullScreenParticles();
+        playClickSound(); 
+        initFullScreenParticles(); // Inicia partículas para el fondo ampliado
     });
 
+    // Reproduce el sonido al ampliar la imagen
     function playClickSound() {
-        const clickSound = new Audio(''); // Puedes agregar una URL de sonido aquí
+        const clickSound = new Audio('https://raw.githubusercontent.com/davidrossell93/xatspace/main/ampliada.mp3');
         clickSound.play();
     }
 
     // Oculta la imagen ampliada al hacer clic en cualquier parte del contenedor
-    const closeFullScreen = () => {
-        fullScreenContainer.style.display = 'none'; // Oculta el contenedor de pantalla completa
-    };
-
-    fullScreenContainer.addEventListener('click', closeFullScreen);
-    fullScreenContainer.addEventListener('touchend', closeFullScreen); // Soporte para móviles
+    fullScreenContainer.addEventListener('click', (event) => {
+        if (event.target === fullScreenContainer) { 
+            fullScreenContainer.style.display = 'none'; // Oculta el contenedor de pantalla completa
+        }
+    });
 
     // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
