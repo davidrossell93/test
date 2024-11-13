@@ -90,7 +90,7 @@ body {
     transform: scale(1.2);
 }
 
-/* Contenedor para la imagen ampliada, oculto por defecto */
+/* Contenedor para la imagen ampliada */
 .full-screen {
     position: fixed;
     top: 0;
@@ -112,7 +112,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: 0; /* Colocado detrás de la imagen ampliada */
 }
 
 /* Imagen dentro del contenedor de pantalla completa */
@@ -126,6 +126,7 @@ body {
     z-index: 1; /* Asegura que la imagen esté sobre las partículas */
 }
 
+/* Efecto de entrada de la tarjeta de perfil */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
