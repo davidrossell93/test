@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Reproduce el sonido al ampliar la imagen
     function playClickSound() {
-        const clickSound = new Audio('https://raw.githubusercontent.com/davidrossell93/xatspace/main/ampliada.mp3');
+        const clickSound = new Audio('');
         clickSound.play();
     }
 
