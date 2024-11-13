@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const audio = document.getElementById("autoplayAudio");
 
@@ -41,10 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
         clickSound.play();
     }
 
-    // Oculta la imagen ampliada al hacer clic en cualquier lugar del contenedor
-    fullScreenContainer.addEventListener('click', () => {
+    // Oculta la imagen ampliada al hacer clic en cualquier lugar del contenedor, funciona para dispositivos móviles y de escritorio
+    const closeFullScreen = () => {
         fullScreenContainer.style.display = 'none';
-    });
+    };
+
+    fullScreenContainer.addEventListener('click', closeFullScreen);
+    fullScreenContainer.addEventListener('touchend', closeFullScreen);
 
     // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
