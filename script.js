@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas interactivas para el fondo principal
+    // Configuración de partículas para el fondo principal con `detect_on: 'window'`
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
@@ -49,21 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
             move: { enable: true, speed: 1.5, random: true }
         },
         interactivity: {
-            detect_on: 'window', // Detecta interacciones en toda la ventana, permitiendo jugar con partículas en fondo completo
-            events: {
-                onhover: { enable: true, mode: 'repulse' }, // Repulsión al acercar el cursor
-                onclick: { enable: true, mode: 'push' }, // Añade partículas al hacer clic
-                resize: true
-            },
+            detect_on: 'window', // Asegura que detecta interacciones en toda la ventana
+            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
             modes: {
-                repulse: { distance: 100, duration: 0.4 }, // Configuración de repulsión
-                push: { particles_nb: 4 } // Partículas añadidas al hacer clic
+                repulse: { distance: 100, duration: 0.4 },
+                push: { particles_nb: 4 }
             }
         },
         retina_detect: true
     });
 
-    // Inicializa partículas interactivas para la imagen ampliada
+    // Inicializa partículas para la imagen ampliada con la misma configuración
     function initFullScreenParticles() {
         particlesJS('particles-fullscreen', {
             particles: {
@@ -76,21 +72,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 move: { enable: true, speed: 1.5, random: true }
             },
             interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' }, // Repulsión al acercar el cursor
-                    onclick: { enable: true, mode: 'push' }, // Añade partículas al hacer clic
-                    resize: true
-                },
+                detect_on: 'canvas', // Detecta interacciones en el lienzo de la imagen ampliada
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
                 modes: {
-                    repulse: { distance: 100, duration: 0.4 }, // Configuración de repulsión
-                    push: { particles_nb: 4 } // Partículas añadidas al hacer clic
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
                 }
-            },
-            retina_detect: true
+            }
         });
     }
-
+    
     // Cambiar el fondo de forma gradual entre negro y violeta en ambos contenedores
     let colors = [
         [0, 0, 0],         // Negro
