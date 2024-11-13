@@ -102,7 +102,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    overflow: hidden; /* Evita el desbordamiento en dispositivos móviles */
+    cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
 }
 
 /* Imagen dentro del contenedor de pantalla completa */
@@ -113,10 +113,6 @@ body {
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(200, 0, 0, 0.8);
-    display: block;
-    margin: auto; /* Asegura que la imagen esté centrada */
-    align-self: center; /* Centrado vertical dentro del contenedor flex */
-    justify-self: center; /* Centrado horizontal dentro del contenedor flex */
 }
 
 @keyframes fadeIn {
