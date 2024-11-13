@@ -182,11 +182,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (step > steps) {
                 clearInterval(interval);
                 currentIndex = nextIndex;
-                changeBackgroundColor(); // Llama a la función de nuevo para continuar la animación
+                setTimeout(changeBackgroundColor, 3000); // Pausa antes de la siguiente transición
             }
         }, 50); // 50 ms para un cambio suave
     }
 
-    // Iniciar el cambio de color de fondo
-    changeBackgroundColor();
+    // Iniciar el cambio de color de fondo después de 2 segundos
+    setTimeout(changeBackgroundColor, 2000);
 });
