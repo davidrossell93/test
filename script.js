@@ -28,26 +28,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Muestra la imagen ampliada al hacer clic en la imagen de perfil
     profileImage.addEventListener('click', () => {
-        fullScreenContainer.style.display = 'flex'; // Muestra el contenedor de pantalla completa
-        initFullScreenParticles(); // Inicia partículas para el fondo ampliado
+        fullScreenContainer.style.display = 'flex';
+        initFullScreenParticles();
     });
 
     // Oculta la imagen ampliada al hacer clic en cualquier parte del contenedor
     fullScreenContainer.addEventListener('click', () => {
-        fullScreenContainer.style.display = 'none'; // Oculta el contenedor de pantalla completa
-        particlesJS("particles-fullscreen", {}); // Reinicia las partículas para pantalla completa
+        fullScreenContainer.style.display = 'none';
     });
 
     // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: { value: ["#000000", "#6a0dad"] }, // Negro y violeta
+            color: { value: ["#000000", "#6a0dad"] },
             shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
             opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
             size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
             line_linked: { enable: true, distance: 150, color: "#6a0dad", opacity: 0.6, width: 1 },
-            move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: "out", attract: { enable: false } }
+            move: { enable: true, speed: 1.5, random: true }
         },
         interactivity: {
             detect_on: 'canvas',
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
                 size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
                 line_linked: { enable: true, distance: 150, color: "#6a0dad", opacity: 0.6, width: 1 },
-                move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: "out", attract: { enable: false } }
+                move: { enable: true, speed: 1.5, random: true }
             },
             interactivity: {
                 detect_on: 'canvas',
@@ -76,14 +75,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cambia el fondo de forma gradual entre negro y violeta
+    // Cambiar el fondo de forma gradual entre negro y violeta en ambos contenedores
     let colors = [
-        [0, 0, 0],          // Negro
+        [0, 0, 0],         // Negro
         [75, 0, 130]       // Violeta suave (#4B0082)
     ];
     let currentIndex = 0;
-    const stepsToViolet = 25;  // Número de pasos para cambiar a violeta (rápido)
-    const stepsToBlack = 300;   // Número de pasos para volver a negro (lento)
+    const stepsToViolet = 25;
+    const stepsToBlack = 300;
 
     function interpolateColor(colorA, colorB, factor) {
         const result = colorA.slice();
@@ -101,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const interval = setInterval(() => {
             const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
             document.body.style.backgroundColor = color;
+            fullScreenContainer.style.backgroundColor = color; // Aplica el color al contenedor de imagen ampliada
             step++;
 
             if (step > steps) {
