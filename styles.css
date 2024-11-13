@@ -90,7 +90,7 @@ body {
     transform: scale(1.2);
 }
 
-/* Contenedor para la imagen ampliada */
+/* Contenedor para la imagen ampliada, oculto por defecto */
 .full-screen {
     position: fixed;
     top: 0;
@@ -98,19 +98,21 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    display: none;
+    display: none; /* Asegura que esté oculto al cargar la página */
     align-items: center;
     justify-content: center;
     z-index: 1000;
 }
 
+/* Imagen dentro del contenedor de pantalla completa */
 .full-screen img {
     max-width: 90%;
     max-height: 90%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 25px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 5px solid rgba(200, 0, 0, 0.8);
+    margin: 0 auto;
 }
 
 /* Botón para cerrar la imagen ampliada */
