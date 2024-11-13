@@ -113,6 +113,7 @@ body {
     border-radius: 25px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 5px solid rgba(200, 0, 0, 0.8);
+    margin: auto;
 }
 
 /* Botón para cerrar la imagen ampliada */
