@@ -153,15 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cambiar el fondo de forma gradual entre negro, violeta claro y violeta oscuro
+    // Cambiar el fondo de forma gradual entre negro y un violeta sutil
     let colors = [
         [0, 0, 0],          // Negro
-        [180, 82, 205],     // Violeta claro (#B452CD)
-        [106, 13, 173]      // Violeta oscuro (#6a0dad)
+        [75, 0, 130]       // Violeta suave (#4B0082)
     ];
     let currentIndex = 0;
-    const stepsToViolet = 100;  // Número de pasos para cambiar a violeta (más rápido)
-    const stepsToBlack = 300;   // Número de pasos para volver a negro (más lento)
+    const stepsToViolet = 25;  // Número de pasos para cambiar a violeta (rápido)
+    const stepsToBlack = 300;   // Número de pasos para volver a negro (lento)
 
     function interpolateColor(colorA, colorB, factor) {
         const result = colorA.slice();
@@ -174,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function changeBackgroundColor() {
         let step = 0;
         const nextIndex = (currentIndex + 1) % colors.length;
-        const steps = currentIndex === 0 ? stepsToViolet : stepsToBlack;  // Cambiar de negro a violeta más rápido
+        const steps = currentIndex === 0 ? stepsToViolet : stepsToBlack;  // Cambiar de negro a violeta muy rápido
 
         const interval = setInterval(() => {
             const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
@@ -184,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (step > steps) {
                 clearInterval(interval);
                 currentIndex = nextIndex;
-                const delay = currentIndex === 0 ? 5000 : 2000; // Más tiempo en negro, menos en violeta
+                const delay = currentIndex === 0 ? 7000 : 500; // Mucho tiempo en negro, muy poco en violeta
                 setTimeout(changeBackgroundColor, delay);
             }
         }, 50);
