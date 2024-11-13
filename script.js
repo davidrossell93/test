@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     const audio = document.getElementById("autoplayAudio");
 
@@ -27,30 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Manejo de la imagen ampliada
     const profileImage = document.getElementById('profileImage');
     const fullScreenContainer = document.getElementById('fullScreenContainer');
-    const closeButton = document.querySelector('.close-button');
 
+    // Muestra la imagen ampliada al hacer clic en la imagen de perfil
     profileImage.addEventListener('click', () => {
         fullScreenContainer.style.display = 'flex'; 
-        profileImage.classList.toggle('clicked');
         playClickSound(); 
         initFullScreenParticles();
     });
 
     function playClickSound() {
-        const clickSound = new Audio('');
+        const clickSound = new Audio(''); // Agrega una URL si deseas un sonido al ampliar la imagen
         clickSound.play();
     }
 
-    closeButton.addEventListener('click', () => {
-        fullScreenContainer.style.display = 'none'; 
-        profileImage.classList.remove('clicked'); 
-    });
-
-    fullScreenContainer.addEventListener('click', (event) => {
-        if (event.target === fullScreenContainer) { 
-            fullScreenContainer.style.display = 'none'; 
-            profileImage.classList.remove('clicked'); 
-        }
+    // Oculta la imagen ampliada al hacer clic en cualquier lugar del contenedor
+    fullScreenContainer.addEventListener('click', () => {
+        fullScreenContainer.style.display = 'none';
     });
 
     // Configuración de partículas para el fondo principal
