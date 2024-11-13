@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileImage = document.getElementById('profileImage');
     const fullScreenContainer = document.getElementById('fullScreenContainer');
 
-    // Función para intentar reproducir el audio
+    // Intentar reproducir el audio automáticamente
     const tryAutoPlay = () => {
         audio.play().then(() => {
             console.log('Reproducción automática exitosa');
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Eventos de interacción para activar el audio en móviles
+    // Añadir eventos de interacción para activar el audio en móviles
     const addInteractionEvents = () => {
         document.addEventListener('click', tryAutoPlay);
         document.addEventListener('touchstart', tryAutoPlay);
@@ -29,15 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Muestra la imagen ampliada al hacer clic en la imagen de perfil
     profileImage.addEventListener('click', () => {
         fullScreenContainer.style.display = 'flex'; // Muestra el contenedor de pantalla completa
-        playClickSound(); 
         initFullScreenParticles(); // Inicia partículas para el fondo ampliado
     });
-
-    // Reproduce el sonido al ampliar la imagen
-    function playClickSound() {
-        const clickSound = new Audio('');
-        clickSound.play();
-    }
 
     // Oculta la imagen ampliada al hacer clic en cualquier parte del contenedor
     fullScreenContainer.addEventListener('click', (event) => {
@@ -84,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cambiar el fondo de forma gradual entre negro y un violeta sutil
+    // Cambia el fondo de forma gradual entre negro y violeta
     let colors = [
         [0, 0, 0],          // Negro
         [75, 0, 130]       // Violeta suave (#4B0082)
