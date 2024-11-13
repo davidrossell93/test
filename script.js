@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas para el fondo principal con interactividad
+    // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
@@ -50,20 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         interactivity: {
             detect_on: 'canvas',
-            events: {
-                onhover: { enable: true, mode: 'repulse' }, // Partículas repelen al acercar el cursor
-                onclick: { enable: true, mode: 'push' }, // Añade partículas al hacer clic
-                resize: true
-            },
-            modes: {
-                repulse: { distance: 100, duration: 0.4 }, // Personaliza el efecto de repulsión
-                push: { particles_nb: 4 } // Número de partículas añadidas en clic
-            }
+            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }
         },
         retina_detect: true
     });
 
-    // Inicializa partículas interactivas para la imagen ampliada
+    // Inicializa partículas para la imagen ampliada
     function initFullScreenParticles() {
         particlesJS('particles-fullscreen', {
             particles: {
@@ -77,17 +69,49 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             interactivity: {
                 detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' }, // Partículas repelen al acercar el cursor
-                    onclick: { enable: true, mode: 'push' }, // Añade partículas al hacer clic
-                    resize: true
-                },
-                modes: {
-                    repulse: { distance: 100, duration: 0.4 }, // Personaliza el efecto de repulsión
-                    push: { particles_nb: 4 } // Número de partículas añadidas en clic
-                }
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }
             },
             retina_detect: true
         });
     }
+
+    // Cambiar el fondo de forma gradual entre negro y violeta en ambos contenedores
+    let colors = [
+        [0, 0, 0],         // Negro
+        [75, 0, 130]       // Violeta suave (#4B0082)
+    ];
+    let currentIndex = 0;
+    const stepsToViolet = 25;
+    const stepsToBlack = 300;
+
+    function interpolateColor(colorA, colorB, factor) {
+        const result = colorA.slice();
+        for (let i = 0; i < 3; i++) {
+            result[i] = Math.round(result[i] + factor * (colorB[i] - colorA[i]));
+        }
+        return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
+    }
+
+    function changeBackgroundColor() {
+        let step = 0;
+        const nextIndex = (currentIndex + 1) % colors.length;
+        const steps = currentIndex === 0 ? stepsToViolet : stepsToBlack;
+
+        const interval = setInterval(() => {
+            const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
+            document.body.style.backgroundColor = color;
+            fullScreenContainer.style.backgroundColor = color; // Aplica el color al contenedor de imagen ampliada
+            step++;
+
+            if (step > steps) {
+                clearInterval(interval);
+                currentIndex = nextIndex;
+                const delay = currentIndex === 0 ? 7000 : 500;
+                setTimeout(changeBackgroundColor, delay);
+            }
+        }, 50);
+    }
+
+    // Iniciar el cambio de color de fondo después de 2 segundos
+    setTimeout(changeBackgroundColor, 2000);
 });
