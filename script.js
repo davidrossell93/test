@@ -33,10 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Oculta la imagen ampliada al hacer clic en cualquier parte del contenedor
-    fullScreenContainer.addEventListener('click', (event) => {
-        if (event.target === fullScreenContainer) { 
-            fullScreenContainer.style.display = 'none'; // Oculta el contenedor de pantalla completa
-        }
+    fullScreenContainer.addEventListener('click', () => {
+        fullScreenContainer.style.display = 'none'; // Oculta el contenedor de pantalla completa
     });
 
     // Configuración de partículas para el fondo principal
