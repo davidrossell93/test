@@ -49,15 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
             move: { enable: true, speed: 1.5, random: true }
         },
         interactivity: {
-            detect_on: 'canvas',
+            detect_on: 'window', // Detecta interacciones en toda la ventana, permitiendo jugar con partículas en fondo completo
             events: {
-                onhover: { enable: true, mode: 'repulse' },
-                onclick: { enable: true, mode: 'push' },
+                onhover: { enable: true, mode: 'repulse' }, // Repulsión al acercar el cursor
+                onclick: { enable: true, mode: 'push' }, // Añade partículas al hacer clic
                 resize: true
             },
             modes: {
-                repulse: { distance: 100, duration: 0.4 },
-                push: { particles_nb: 4 }
+                repulse: { distance: 100, duration: 0.4 }, // Configuración de repulsión
+                push: { particles_nb: 4 } // Partículas añadidas al hacer clic
             }
         },
         retina_detect: true
@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
             interactivity: {
                 detect_on: 'canvas',
                 events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
+                    onhover: { enable: true, mode: 'repulse' }, // Repulsión al acercar el cursor
+                    onclick: { enable: true, mode: 'push' }, // Añade partículas al hacer clic
                     resize: true
                 },
                 modes: {
-                    repulse: { distance: 100, duration: 0.4 },
-                    push: { particles_nb: 4 }
+                    repulse: { distance: 100, duration: 0.4 }, // Configuración de repulsión
+                    push: { particles_nb: 4 } // Partículas añadidas al hacer clic
                 }
             },
             retina_detect: true
