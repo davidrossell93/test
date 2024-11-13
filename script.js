@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas para el fondo principal con `detect_on: 'window'`
+    // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             move: { enable: true, speed: 1.5, random: true }
         },
         interactivity: {
-            detect_on: 'window', // Asegura que detecta interacciones en toda la ventana
+            detect_on: 'window', // Detecta interacciones en toda la ventana
             events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
             modes: {
                 repulse: { distance: 100, duration: 0.4 },
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Cambiar el fondo de forma gradual entre negro y violeta en ambos contenedores
     let colors = [
         [0, 0, 0],         // Negro
