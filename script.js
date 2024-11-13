@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Eventos de interacción
+    // Eventos de interacción para activar el audio en móviles
     const addInteractionEvents = () => {
         document.addEventListener('click', tryAutoPlay);
         document.addEventListener('touchstart', tryAutoPlay);
@@ -30,119 +30,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Muestra la imagen ampliada al hacer clic en la imagen de perfil
     profileImage.addEventListener('click', () => {
-        fullScreenContainer.style.display = 'flex'; 
-        playClickSound(); 
+        fullScreenContainer.style.display = 'flex'; // Muestra el contenedor de pantalla completa
+        playClickSound();
         initFullScreenParticles();
     });
 
     function playClickSound() {
-        const clickSound = new Audio(''); // Agrega una URL si deseas un sonido al ampliar la imagen
+        const clickSound = new Audio(''); // Puedes agregar una URL de sonido aquí
         clickSound.play();
     }
 
-    // Oculta la imagen ampliada al hacer clic en cualquier lugar del contenedor, funciona para dispositivos móviles y de escritorio
+    // Oculta la imagen ampliada al hacer clic en cualquier parte del contenedor
     const closeFullScreen = () => {
-        fullScreenContainer.style.display = 'none';
+        fullScreenContainer.style.display = 'none'; // Oculta el contenedor de pantalla completa
     };
 
     fullScreenContainer.addEventListener('click', closeFullScreen);
-    fullScreenContainer.addEventListener('touchend', closeFullScreen);
+    fullScreenContainer.addEventListener('touchend', closeFullScreen); // Soporte para móviles
 
     // Configuración de partículas para el fondo principal
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: {
-                value: ["#000000", "#6a0dad"], // Negro y violeta
-            },
-            shape: {
-                type: 'circle',
-                stroke: { width: 0, color: '#000000' }
-            },
-            opacity: {
-                value: 0.5,
-                random: true,
-                anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-            },
-            size: {
-                value: 3,
-                random: true,
-                anim: { enable: true, speed: 3, size_min: 0.1, sync: false }
-            },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: "#6a0dad", // Color violeta para los enlaces
-                opacity: 0.6,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 1.5,
-                direction: 'none',
-                random: true,
-                straight: false,
-                out_mode: "out",
-                attract: { enable: false }
-            }
+            color: { value: ["#000000", "#6a0dad"] }, // Negro y violeta
+            shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+            opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+            size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
+            line_linked: { enable: true, distance: 150, color: "#6a0dad", opacity: 0.6, width: 1 },
+            move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: "out", attract: { enable: false } }
         },
         interactivity: {
             detect_on: 'canvas',
-            events: {
-                onhover: { enable: true, mode: 'repulse' },
-                onclick: { enable: true, mode: 'push' },
-                resize: true
-            }
+            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }
         },
         retina_detect: true
     });
 
-    // Inicializa partículas para la imagen ampliada con los mismos colores
+    // Inicializa partículas para la imagen ampliada
     function initFullScreenParticles() {
         particlesJS('particles-fullscreen', {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: {
-                    value: ["#000000", "#6a0dad"], // Negro y violeta
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: { width: 0, color: '#000000' }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: { enable: true, speed: 3, size_min: 0.1, sync: false }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#6a0dad", // Color violeta para los enlaces
-                    opacity: 0.6,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 1.5,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    attract: { enable: false }
-                }
+                color: { value: ["#000000", "#6a0dad"] },
+                shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
+                line_linked: { enable: true, distance: 150, color: "#6a0dad", opacity: 0.6, width: 1 },
+                move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: "out", attract: { enable: false } }
             },
             interactivity: {
                 detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                }
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }
             },
             retina_detect: true
         });
@@ -168,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function changeBackgroundColor() {
         let step = 0;
         const nextIndex = (currentIndex + 1) % colors.length;
-        const steps = currentIndex === 0 ? stepsToViolet : stepsToBlack;  // Cambiar de negro a violeta muy rápido
+        const steps = currentIndex === 0 ? stepsToViolet : stepsToBlack;
 
         const interval = setInterval(() => {
             const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
@@ -178,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (step > steps) {
                 clearInterval(interval);
                 currentIndex = nextIndex;
-                const delay = currentIndex === 0 ? 7000 : 500; // Mucho tiempo en negro, muy poco en violeta
+                const delay = currentIndex === 0 ? 7000 : 500;
                 setTimeout(changeBackgroundColor, delay);
             }
         }, 50);
