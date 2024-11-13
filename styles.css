@@ -103,17 +103,18 @@ body {
     justify-content: center;
     z-index: 1000;
     cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
-    overflow: hidden; /* Evita el desbordamiento en dispositivos móviles */
 }
 
 /* Imagen dentro del contenedor de pantalla completa */
 .full-screen img {
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
     border-radius: 25px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 5px solid rgba(200, 0, 0, 0.8);
+    margin: 0; /* Asegura que no haya márgenes adicionales */
+    display: block; /* Asegura que la imagen no tome espacio extra */
 }
 
 /* Botón para cerrar la imagen ampliada */
