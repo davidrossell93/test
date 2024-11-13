@@ -98,7 +98,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.85);
-    display: flex; /* Asegura el centrado con flexbox */
+    display: none; /* Oculto por defecto */
     align-items: center;
     justify-content: center;
     z-index: 1000;
