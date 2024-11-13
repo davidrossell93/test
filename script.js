@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initFullScreenParticles();
     });
 
-    function playClickSound() {
-        const clickSound = new Audio('https://raw.githubusercontent.com/davidrossell93/xatspace/main/ampliada.mp3');
-        clickSound.play();
     }
 
     closeButton.addEventListener('click', () => {
