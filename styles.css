@@ -90,30 +90,32 @@ body {
     transform: scale(1.2);
 }
 
-/* Opciones de visualización en pantalla completa */
+/* Contenedor para la imagen ampliada, oculto por defecto */
 .full-screen {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.85);
-    display: none;
+    display: none; /* Oculto por defecto */
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
+    overflow: hidden; /* Evita el desbordamiento en dispositivos móviles */
 }
 
+/* Imagen dentro del contenedor de pantalla completa */
 .full-screen img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: cover;
-    border-radius: 25px;
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-radius 0.3s ease, box-shadow 0.3s ease;
-    pointer-events: none;
-    border: 5px solid rgba(200, 0, 0, 0.8);
-    animation: flicker 2s infinite;
+    border: 3px solid rgba(200, 0, 0, 0.8);
+    display: block;
+    margin: 0; /* Asegura que no haya márgenes adicionales */
 }
 
 @keyframes fadeIn {
