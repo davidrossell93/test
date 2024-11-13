@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas para el fondo principal
+    // Configuración de partículas interactivas para el fondo principal
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
@@ -50,12 +50,20 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         interactivity: {
             detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }
+            events: {
+                onhover: { enable: true, mode: 'repulse' },
+                onclick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                repulse: { distance: 100, duration: 0.4 },
+                push: { particles_nb: 4 }
+            }
         },
         retina_detect: true
     });
 
-    // Inicializa partículas para la imagen ampliada
+    // Inicializa partículas interactivas para la imagen ampliada
     function initFullScreenParticles() {
         particlesJS('particles-fullscreen', {
             particles: {
@@ -69,7 +77,15 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             interactivity: {
                 detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true }
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
             },
             retina_detect: true
         });
@@ -100,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const interval = setInterval(() => {
             const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
             document.body.style.backgroundColor = color;
-            fullScreenContainer.style.backgroundColor = color; // Aplica el color al contenedor de imagen ampliada
+            fullScreenContainer.style.backgroundColor = color;
             step++;
 
             if (step > steps) {
