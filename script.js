@@ -153,11 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cambiar el fondo de forma gradual entre negro y violeta
-    let color1 = [0, 0, 0];     // Negro
-    let color2 = [106, 13, 173]; // Violeta bonito (#6a0dad)
+    // Cambiar el fondo de forma gradual entre negro, violeta claro y violeta oscuro
+    let colors = [
+        [0, 0, 0],          // Negro
+        [180, 82, 205],     // Violeta claro (#B452CD)
+        [106, 13, 173]      // Violeta oscuro (#6a0dad)
+    ];
     let currentIndex = 0;
-    const steps = 100; // Número de pasos en la transición
+    const steps = 200; // Número de pasos en la transición (para un cambio más lento)
 
     function interpolateColor(colorA, colorB, factor) {
         const result = colorA.slice();
@@ -169,20 +172,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function changeBackgroundColor() {
         let step = 0;
+        const nextIndex = (currentIndex + 1) % colors.length;
 
         const interval = setInterval(() => {
-            const color = interpolateColor(color1, color2, step / steps);
+            const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
             document.body.style.backgroundColor = color;
             step++;
 
             if (step > steps) {
-                // Intercambiar colores y reiniciar el paso
-                const temp = color1;
-                color1 = color2;
-                color2 = temp;
-                step = 0;
+                clearInterval(interval);
+                currentIndex = nextIndex;
+                changeBackgroundColor(); // Llama a la función de nuevo para continuar la animación
             }
-        }, 50); // Cambia el fondo cada 50ms para hacer la transición suave
+        }, 50); // 50 ms para un cambio suave
     }
 
     // Iniciar el cambio de color de fondo
