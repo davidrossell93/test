@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function playClickSound() {
-        const clickSound = new Audio('https://raw.githubusercontent.com/davidrossell93/xatspace/main/ampliada.mp3');
+        const clickSound = new Audio('');
         clickSound.play();
     }
 
