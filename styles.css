@@ -105,6 +105,16 @@ body {
     cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
 }
 
+/* Partículas en el fondo de la imagen ampliada */
+#particles-fullscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
 /* Imagen dentro del contenedor de pantalla completa */
 .full-screen img {
     max-width: 90vw;
@@ -113,6 +123,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(200, 0, 0, 0.8);
+    z-index: 1; /* Asegura que la imagen esté sobre las partículas */
 }
 
 @keyframes fadeIn {
@@ -120,12 +131,12 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Partículas */
+/* Partículas del fondo principal */
 #particles-js {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: -1; /* Asegura que el fondo de partículas esté detrás de todo */
 }
