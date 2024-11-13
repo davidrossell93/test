@@ -115,15 +115,9 @@ body {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(200, 0, 0, 0.8);
     display: block;
-    margin: 0; /* Asegura que no haya márgenes adicionales */
+    margin: auto; /* Asegura que la imagen esté centrada */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Animación de fadeIn */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
