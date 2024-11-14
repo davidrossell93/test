@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil con Partículas y Efecto Topo</title>
+    <title>Hola</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Contenedores de fondo -->
-    <div id="topo-background"></div>
+    <!-- Partículas del fondo principal -->
+    <div id="particles-js"></div>
 
     <!-- Tarjeta de perfil única -->
     <div class="profile-container">
         <div class="profile-pic-container">
-            <img src="" alt="Foto de Perfil" class="profile-pic" id="profileImage">
+            <img src="https://xatimg.com/image/cu1apH6Z3kpq.jpg" alt="Foto de Perfil" class="profile-pic" id="profileImage">
         </div>
+        
         <div class="username-container">
             <h1 class="username"><span class="butterfly"></span></h1>
         </div>
-        <p class="user-id">""</p>
-        <p class="user-id">""</p>
+        
+        <p class="user-id"></p>
+        <p class="user-id"></p>
+
         <div class="bottom-icons">
             <span class="icon horoscopo"></span>
             <span class="icon star"></span>
@@ -28,8 +31,10 @@
 
     <!-- Contenedor de la imagen en pantalla completa -->
     <div id="fullScreenContainer" class="full-screen">
+        <!-- Partículas del fondo de la imagen ampliada -->
+        <div id="particles-fullscreen"></div>
         <div class="fullscreen-content">
-            <img id="profileImageLarge" src="" alt="Perfil Ampliado">
+            <img id="profileImageLarge" src="https://xatimg.com/image/oFsQlZMUBJMF.png" alt="Perfil Ampliado">
         </div>
     </div>
 
@@ -38,7 +43,8 @@
         Tu navegador no soporta la reproducción de audio.
     </audio>
 
-    <!-- Enlace de scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
     <script src="topo.js"></script>
 </body>
 </html>
