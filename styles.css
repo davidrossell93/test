@@ -13,21 +13,21 @@ body {
 
 /* Tarjeta de perfil con fondo oscuro y borde negro */
 .profile-container {
-    background: rgba(15, 15, 15, 0.9); /* Fondo más oscuro */
-    backdrop-filter: blur(8px) brightness(0.8); /* Oscurecer tarjeta */
+    background: rgba(15, 15, 15, 0.9); /* Fondo oscuro */
+    backdrop-filter: blur(8px) brightness(0.9); /* Ligero oscurecimiento */
     border: 2px solid #000; /* Borde negro */
     border-radius: 15px;
     padding: 30px;
     width: 90%;
     max-width: 320px;
     text-align: center;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6); /* Sombra oscura */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Sombra oscura */
     position: relative;
     z-index: 1;
     animation: fadeIn 2s ease;
 }
 
-/* Imagen de perfil con filtro oscuro y borde siniestro */
+/* Imagen de perfil con borde sutil y sombra */
 .profile-pic-container {
     position: relative;
     display: inline-block;
@@ -41,8 +41,8 @@ body {
     height: auto;
     border-radius: 10px;
     border: 2px solid #000; /* Borde negro */
-    box-shadow: 0px 0px 15px rgba(139, 0, 0, 0.6); /* Resplandor rojo oscuro */
-    filter: brightness(0.7) contrast(1.1); /* Filtro para oscurecer y aumentar el contraste */
+    box-shadow: 0px 0px 10px rgba(139, 0, 0, 0.4); /* Resplandor rojo oscuro sutil */
+    filter: brightness(0.9) contrast(1.05); /* Filtro ligero para mantener visibilidad */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     object-fit: cover;
     cursor: pointer;
@@ -50,8 +50,7 @@ body {
 
 .profile-pic:hover {
     transform: scale(1.05);
-    box-shadow: 0px 0px 25px rgba(139, 0, 0, 0.8); /* Aumenta el resplandor rojo oscuro al hacer hover */
-    filter: brightness(0.6) contrast(1.2); /* Oscurece más al hacer hover */
+    box-shadow: 0px 0px 20px rgba(139, 0, 0, 0.6); /* Aumenta el resplandor rojo oscuro al hacer hover */
 }
 
 /* Nombre de usuario con efecto sombrío */
@@ -71,7 +70,6 @@ body {
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(139, 0, 0, 0.7); /* Sombra roja */
 }
 
-/* ID de usuario con estilo oscuro */
 .user-id {
     font-size: 16px;
     color: rgba(255, 255, 255, 0.8);
