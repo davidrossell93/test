@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas con colores oscuros y terroríficos
+    // Configuración de partículas para el fondo principal con colores oscuros
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: { value: ["#4b0082", "#ff0000", "#8b0000", "#191919"] }, // Colores oscuros y rojos para un efecto terrorífico
+            color: { value: ["#4b0082", "#ff0000", "#8b0000", "#191919"] }, // Colores oscuros y rojos
             shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
             opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
             size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             move: { enable: true, speed: 1.5, random: true }
         },
         interactivity: {
-            detect_on: 'canvas',
+            detect_on: 'window',
             events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
             modes: {
                 repulse: { distance: 100, duration: 0.4 },
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesJS('particles-fullscreen', {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: { value: ["#4b0082", "#ff0000", "#8b0000", "#191919"] },
+                color: { value: ["#4b0082", "#ff0000", "#8b0000", "#191919"] }, // Mismos colores oscuros y rojos
                 shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
                 opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
                 size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
