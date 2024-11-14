@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas con un toque rojo oscuro
+    // Configuración de partículas con tonos oscuros y aterradores
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: { value: ["#333333", "#555555", "#8b0000", "#191919"] }, // Toque de rojo oscuro en las partículas
+            color: { value: ["#1a1a1a", "#2c2c2c", "#8b0000", "#0f0f0f"] }, // Tonos grises muy oscuros con rojo oscuro
             shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
             opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
             size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesJS('particles-fullscreen', {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: { value: ["#333333", "#555555", "#8b0000", "#191919"] }, // Toque de rojo oscuro en partículas ampliadas
+                color: { value: ["#1a1a1a", "#2c2c2c", "#8b0000", "#0f0f0f"] }, // Mismos tonos oscuros y aterradores
                 shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
                 opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
                 size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
@@ -77,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Colores para el fondo en tonos de gris oscuro
+    // Colores para el fondo en tonos de gris muy oscuro
     let colors = [
-        [25, 25, 25],        // Gris oscuro
-        [50, 50, 50],        // Gris medio oscuro
-        [10, 10, 10]         // Gris muy oscuro casi negro
+        [15, 15, 15],       // Gris oscuro casi negro
+        [30, 30, 30],       // Gris más oscuro
+        [5, 5, 5]           // Gris muy oscuro, casi negro
     ];
     let currentIndex = 0;
     const stepsToGray = 25;
