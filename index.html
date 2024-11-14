@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Perfil</title>
+    <title>Perfil con Partículas y Efecto Topo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fondo de topo.js -->
+    <!-- Contenedores de fondo -->
     <div id="topo-background"></div>
-    
-    <!-- Partículas del fondo principal -->
     <div id="particles-js"></div>
 
     <!-- Tarjeta de perfil única -->
     <div class="profile-container">
         <div class="profile-pic-container">
-            <img src="profile.jpg" alt="Foto de Perfil" class="profile-pic" id="profileImage">
+            <img src="" alt="Foto de Perfil" class="profile-pic" id="profileImage">
         </div>
-        
         <div class="username-container">
-            <h1 class="username"><span class="butterfly">Usuario</span></h1>
+            <h1 class="username"><span class="butterfly"></span></h1>
         </div>
-        
-        <p class="user-id">"User ID 123"</p>
-
+        <p class="user-id">""</p>
+        <p class="user-id">""</p>
         <div class="bottom-icons">
             <span class="icon horoscopo"></span>
             <span class="icon star"></span>
@@ -35,17 +31,18 @@
     <div id="fullScreenContainer" class="full-screen">
         <div id="particles-fullscreen"></div>
         <div class="fullscreen-content">
-            <img id="profileImageLarge" src="profile.jpg" alt="Perfil Ampliado">
+            <img id="profileImageLarge" src="" alt="Perfil Ampliado">
         </div>
     </div>
 
     <audio id="autoplayAudio" autoplay loop style="display:none;">
-        <source src="audio.mp3" type="audio/mpeg">
+        <source src="" type="audio/mpeg">
         Tu navegador no soporta la reproducción de audio.
     </audio>
 
+    <!-- Enlace de scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="particles.js"></script>
+    <script src="script.js"></script>
     <script src="topo.js"></script>
 </body>
 </html>
