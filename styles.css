@@ -13,7 +13,7 @@ body {
 
 /* Tarjeta de perfil con fondo oscuro */
 .profile-container {
-    background: rgba(20, 20, 20, 0.8); /* Fondo más oscuro */
+    background: rgba(20, 20, 20, 0.8); /* Fondo oscuro */
     backdrop-filter: blur(10px);
     border: 1px solid rgba(50, 50, 50, 0.8); /* Borde oscuro */
     border-radius: 20px;
@@ -27,7 +27,7 @@ body {
     animation: fadeIn 2s ease;
 }
 
-/* Imagen de perfil grande con borde decorativo oscuro */
+/* Imagen de perfil integrada en la tarjeta sin borde */
 .profile-pic-container {
     position: relative;
     display: inline-block;
@@ -39,17 +39,16 @@ body {
     width: 100%;
     max-width: 280px;
     height: auto;
-    border-radius: 10px;
-    border: 2px solid rgba(139, 0, 0, 0.8); /* Borde rojo oscuro */
-    box-shadow: 0 0 15px rgba(139, 0, 0, 0.6); /* Resplandor rojo oscuro */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px; /* Borde redondeado suave */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4); /* Sombra suave para integrarse con la tarjeta */
+    transition: transform 0.3s ease;
     object-fit: cover;
     cursor: pointer;
 }
 
 .profile-pic:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(139, 0, 0, 1); /* Resplandor rojo más intenso al hacer hover */
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6); /* Sombra más intensa al hacer hover */
 }
 
 /* Nombre de usuario con efecto sombrío */
@@ -128,7 +127,6 @@ body {
     object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    border: 3px solid rgba(139, 0, 0, 0.8); /* Borde rojo oscuro */
     z-index: 1;
 }
 
