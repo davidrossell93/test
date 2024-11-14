@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"> <!-- Desactiva el zoom en móviles -->
     <title>Hola</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -46,5 +46,53 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
     <script src="topo.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImage = document.getElementById('profileImage');
+            const fullScreenContainer = document.getElementById('fullScreenContainer');
+
+            // Mostrar la imagen ampliada al hacer clic en la imagen de perfil
+            profileImage.addEventListener('click', () => {
+                fullScreenContainer.style.display = 'flex';
+                initFullScreenParticles();
+
+                // Desactivar el segundo clic para evitar cerrar al hacer clic en el contenedor ampliado
+                fullScreenContainer.removeEventListener('click', hideFullScreen);
+                setTimeout(() => {
+                    fullScreenContainer.addEventListener('click', hideFullScreen);
+                }, 500); // Desactiva el primer clic
+            });
+
+            // Función para ocultar la imagen ampliada
+            function hideFullScreen() {
+                fullScreenContainer.style.display = 'none';
+                fullScreenContainer.removeEventListener('click', hideFullScreen); // Desactivar evento tras el cierre
+            }
+
+            // Inicializa partículas para el fondo de la imagen ampliada
+            function initFullScreenParticles() {
+                particlesJS('particles-fullscreen', {
+                    particles: {
+                        number: { value: 100, density: { enable: true, value_area: 700 } },
+                        color: { value: ["#8B0000", "#FFFFFF", "#000000"] }, // Colores satinado: rojo oscuro, blanco claro y negro
+                        shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                        opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                        size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
+                        line_linked: { enable: true, distance: 150, color: "#8B0000", opacity: 0.6, width: 1 },
+                        move: { enable: true, speed: 1.5, random: true }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                        modes: {
+                            repulse: { distance: 100, duration: 0.4 },
+                            push: { particles_nb: 4 }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
