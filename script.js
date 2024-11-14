@@ -33,11 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
-    // Configuración de partículas para el fondo principal con colores rojos terroríficos
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: { value: ["#8b0000", "#ff0000", "#b22222", "#191919"] }, // Colores rojizos y oscuros
+            color: { value: ["#333333", "#555555", "#8b0000", "#191919"] }, // Colores oscuros con toque de rojo
             shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
             opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
             size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesJS('particles-fullscreen', {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: { value: ["#8b0000", "#ff0000", "#b22222", "#191919"] }, // Mismos colores rojos terroríficos
+                color: { value: ["#333333", "#555555", "#8b0000", "#191919"] }, // Mismos colores oscuros con toque de rojo
                 shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
                 opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
                 size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
@@ -77,14 +76,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Colores para el fondo: gris oscuro y un toque de rojo intermitente
     let colors = [
         [25, 25, 25],        // Gris oscuro
-        [139, 0, 0],         // Rojo oscuro (#8B0000)
-        [178, 34, 34]        // Rojo fuego (#B22222)
+        [139, 0, 0],         // Rojo oscuro (#8B0000) para el toque intermitente
+        [50, 50, 50]         // Gris medio oscuro
     ];
     let currentIndex = 0;
-    const stepsToRed = 25;
-    const stepsToBlack = 300;
+    const stepsToGray = 25;
+    const stepsToRed = 5; // Menor cantidad de pasos para un breve parpadeo en rojo
 
     function interpolateColor(colorA, colorB, factor) {
         const result = colorA.slice();
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function changeBackgroundColor() {
         let step = 0;
         const nextIndex = (currentIndex + 1) % colors.length;
-        const steps = currentIndex === 0 ? stepsToRed : stepsToBlack;
+        const steps = currentIndex === 1 ? stepsToRed : stepsToGray; // Paso breve en rojo
 
         const interval = setInterval(() => {
             const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (step > steps) {
                 clearInterval(interval);
                 currentIndex = nextIndex;
-                const delay = currentIndex === 0 ? 7000 : 500;
+                const delay = currentIndex === 1 ? 100 : 2000; // Retraso más corto en rojo
                 setTimeout(changeBackgroundColor, delay);
             }
         }, 50);
