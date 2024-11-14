@@ -24,22 +24,38 @@ body {
     box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5); /* Sombra roja inicial */
     position: relative;
     z-index: 1;
-    animation: fadeIn 2s ease, redGlow 3s ease-in-out 5s infinite; /* Añadir animación con retardo */
+    animation: fadeIn 2s ease, shake 0.1s infinite alternate, redGlow 5s ease-in-out infinite;
     margin-top: 20px;
 }
 
-/* Animación de parpadeo rojo con pausa */
+/* Efecto de parpadeo rojo */
 @keyframes redGlow {
     0%, 100% { box-shadow: 0px 0px 15px 5px rgba(255, 0, 0, 0.2); }
     50% { box-shadow: 0px 0px 30px 15px rgba(255, 0, 0, 0.6); }
 }
 
-/* Imagen de perfil con ajuste */
+/* Efecto de movimiento */
+@keyframes shake {
+    0% { transform: translate(1px, -1px) rotate(0deg); }
+    10% { transform: translate(-1px, 2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 1px) rotate(1deg); }
+    30% { transform: translate(2px, 1px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* Imagen de perfil con sombra en los bordes, evitando el centro */
 .profile-pic-container {
     position: relative;
     display: inline-block;
     margin-bottom: 15px;
-    width: 90%; /* Ajuste de ancho para que no se recorte */
+    width: 90%;
+    overflow: hidden; /* Recorta el efecto para evitar que se extienda fuera de la imagen */
 }
 
 .profile-pic {
@@ -48,63 +64,41 @@ body {
     height: auto;
     border-radius: 10px;
     border: 2px solid #000;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.3); /* Sombra roja leve */
-    filter: brightness(0.7) contrast(1.2) saturate(0.8);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     object-fit: cover;
     cursor: pointer;
+    filter: brightness(0.9) contrast(1.1); /* Ajuste global de la imagen */
 }
 
-.profile-pic:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6); /* Aumenta la sombra roja al hacer hover */
+/* Sombra oscura en los bordes de la imagen */
+.profile-pic::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.8));
+    pointer-events: none; /* No interfiere con la interacción del usuario */
 }
 
-/* Nombre de usuario con efecto sombrío */
-.username-container {
-    display: flex;
+/* Contenedor de pantalla completa oculto inicialmente */
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none; /* Oculto por defecto */
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    z-index: 1000;
+    cursor: pointer;
 }
 
-.username {
-    font-size: 28px;
-    font-weight: bold;
-    color: #d0d0d0;
-    font-family: 'Pacifico', cursive;
-    -webkit-text-stroke: 1px #303030;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(50, 50, 50, 0.7);
-}
-
-.user-id {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    font-style: italic;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
-}
-
-/* Iconos */
-.bottom-icons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.icon {
-    font-size: 24px;
-    color: #c0c0c0;
-    transition: transform 0.2s, color 0.3s;
-    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
-}
-
-.icon:hover {
-    transform: scale(1.2);
-    color: #808080;
-}
-
-/* Efecto de entrada de la tarjeta de perfil */
+/* Animación de entrada de la tarjeta de perfil */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
