@@ -11,21 +11,42 @@ body {
     color: #fff;
 }
 
-/* Tarjeta de perfil más pequeña con fondo oscuro y borde negro */
+/* Tarjeta de perfil con efecto aterrador */
 .profile-container {
     background: rgba(20, 20, 20, 0.9); /* Fondo gris oscuro */
-    backdrop-filter: blur(8px) brightness(0.8); /* Ligero oscurecimiento */
+    backdrop-filter: blur(8px) brightness(0.8);
     border: 2px solid #000; /* Borde negro */
     border-radius: 15px;
-    padding: 20px; /* Reducir el padding */
+    padding: 20px;
     width: 80%;
-    max-width: 260px; /* Tamaño máximo más pequeño */
+    max-width: 260px;
     text-align: center;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Sombra oscura */
+    box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5); /* Sombra roja inicial */
     position: relative;
     z-index: 1;
-    animation: fadeIn 2s ease;
-    margin-top: 20px; /* Espacio adicional para alejar la tarjeta */
+    animation: fadeIn 2s ease, shake 0.1s infinite alternate, redGlow 3s ease-in-out infinite; /* Añadir animaciones */
+    margin-top: 20px;
+}
+
+/* Animación de parpadeo rojo */
+@keyframes redGlow {
+    0%, 100% { box-shadow: 0px 0px 15px 5px rgba(255, 0, 0, 0.2); }
+    50% { box-shadow: 0px 0px 30px 15px rgba(255, 0, 0, 0.6); }
+}
+
+/* Animación de movimiento irregular (shake) */
+@keyframes shake {
+    0% { transform: translate(1px, -1px) rotate(0deg); }
+    10% { transform: translate(-1px, 2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 1px) rotate(1deg); }
+    30% { transform: translate(2px, 1px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
 /* Imagen de perfil con ajuste */
@@ -38,11 +59,12 @@ body {
 
 .profile-pic {
     width: 100%;
-    max-width: 240px; /* Ajustar el tamaño máximo para que encaje mejor en la tarjeta */
+    max-width: 240px;
     height: auto;
     border-radius: 10px;
-    border: 2px solid #000; /* Borde negro */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); /* Sombra negra sutil */
+    border: 2px solid #000;
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.3); /* Sombra roja leve */
+    filter: brightness(0.7) contrast(1.2) saturate(0.8);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     object-fit: cover;
     cursor: pointer;
@@ -50,7 +72,7 @@ body {
 
 .profile-pic:hover {
     transform: scale(1.05);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6); /* Aumenta la sombra negra al hacer hover */
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6); /* Aumenta la sombra roja al hacer hover */
 }
 
 /* Nombre de usuario con efecto sombrío */
@@ -62,16 +84,16 @@ body {
 }
 
 .username {
-    font-size: 28px; /* Tamaño de fuente reducido */
+    font-size: 28px;
     font-weight: bold;
-    color: #d0d0d0; /* Gris claro */
+    color: #d0d0d0;
     font-family: 'Pacifico', cursive;
-    -webkit-text-stroke: 1px #303030; /* Borde de texto gris oscuro */
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(50, 50, 50, 0.7); /* Sombra oscura */
+    -webkit-text-stroke: 1px #303030;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(50, 50, 50, 0.7);
 }
 
 .user-id {
-    font-size: 14px; /* Reducido el tamaño de la fuente */
+    font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
     font-style: italic;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
@@ -81,55 +103,20 @@ body {
 .bottom-icons {
     display: flex;
     justify-content: center;
-    gap: 12px; /* Reducido el espacio entre los iconos */
+    gap: 12px;
     margin-top: 15px;
 }
 
 .icon {
-    font-size: 24px; /* Tamaño de iconos reducido */
-    color: #c0c0c0; /* Color gris claro */
+    font-size: 24px;
+    color: #c0c0c0;
     transition: transform 0.2s, color 0.3s;
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
 }
 
 .icon:hover {
     transform: scale(1.2);
-    color: #808080; /* Cambia a un gris más oscuro al hacer hover */
-}
-
-/* Contenedor para la imagen ampliada */
-.full-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    cursor: pointer;
-}
-
-/* Partículas en el fondo de la imagen ampliada */
-#particles-fullscreen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-
-/* Imagen dentro del contenedor de pantalla completa */
-.full-screen img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    color: #808080;
 }
 
 /* Efecto de entrada de la tarjeta de perfil */
