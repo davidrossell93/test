@@ -11,33 +11,34 @@ body {
     color: #fff;
 }
 
-/* Tarjeta de perfil con fondo oscuro y borde negro */
+/* Tarjeta de perfil más pequeña con fondo oscuro y borde negro */
 .profile-container {
     background: rgba(20, 20, 20, 0.9); /* Fondo gris oscuro */
     backdrop-filter: blur(8px) brightness(0.8); /* Ligero oscurecimiento */
     border: 2px solid #000; /* Borde negro */
     border-radius: 15px;
-    padding: 30px;
-    width: 90%;
-    max-width: 320px;
+    padding: 20px; /* Reducir el padding */
+    width: 80%;
+    max-width: 260px; /* Tamaño máximo más pequeño */
     text-align: center;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Sombra oscura */
     position: relative;
     z-index: 1;
     animation: fadeIn 2s ease;
+    margin-top: 20px; /* Espacio adicional para alejar la tarjeta */
 }
 
-/* Imagen de perfil con borde sutil y sin oscuridad */
+/* Imagen de perfil con ajuste */
 .profile-pic-container {
     position: relative;
     display: inline-block;
-    margin-bottom: 20px;
-    width: 100%;
+    margin-bottom: 15px;
+    width: 90%; /* Ajuste de ancho para que no se recorte */
 }
 
 .profile-pic {
     width: 100%;
-    max-width: 280px;
+    max-width: 240px; /* Ajustar el tamaño máximo para que encaje mejor en la tarjeta */
     height: auto;
     border-radius: 10px;
     border: 2px solid #000; /* Borde negro */
@@ -61,7 +62,7 @@ body {
 }
 
 .username {
-    font-size: 32px;
+    font-size: 28px; /* Tamaño de fuente reducido */
     font-weight: bold;
     color: #d0d0d0; /* Gris claro */
     font-family: 'Pacifico', cursive;
@@ -70,7 +71,7 @@ body {
 }
 
 .user-id {
-    font-size: 16px;
+    font-size: 14px; /* Reducido el tamaño de la fuente */
     color: rgba(255, 255, 255, 0.8);
     font-style: italic;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
@@ -80,12 +81,12 @@ body {
 .bottom-icons {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 12px; /* Reducido el espacio entre los iconos */
+    margin-top: 15px;
 }
 
 .icon {
-    font-size: 28px;
+    font-size: 24px; /* Tamaño de iconos reducido */
     color: #c0c0c0; /* Color gris claro */
     transition: transform 0.2s, color 0.3s;
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
