@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil con Partículas y Fondo Topo</title>
+    <title>Página de Perfil</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Fondo de topo.js -->
+    <div id="topo-background"></div>
+    
     <!-- Partículas del fondo principal -->
     <div id="particles-js"></div>
-    <!-- Fondo topo.js -->
-    <div id="topo-background"></div>
 
     <!-- Tarjeta de perfil única -->
     <div class="profile-container">
         <div class="profile-pic-container">
-            <img src="" alt="Foto de Perfil" class="profile-pic" id="profileImage">
+            <img src="profile.jpg" alt="Foto de Perfil" class="profile-pic" id="profileImage">
         </div>
         
         <div class="username-container">
-            <h1 class="username"><span class="butterfly"></span></h1>
+            <h1 class="username"><span class="butterfly">Usuario</span></h1>
         </div>
         
-        <p class="user-id">"</p>
-        <p class="user-id">"</p>
+        <p class="user-id">"User ID 123"</p>
 
         <div class="bottom-icons">
             <span class="icon horoscopo"></span>
@@ -35,17 +35,17 @@
     <div id="fullScreenContainer" class="full-screen">
         <div id="particles-fullscreen"></div>
         <div class="fullscreen-content">
-            <img id="profileImageLarge" src="" alt="Perfil Ampliado">
+            <img id="profileImageLarge" src="profile.jpg" alt="Perfil Ampliado">
         </div>
     </div>
 
     <audio id="autoplayAudio" autoplay loop style="display:none;">
-        <source src="" type="audio/mpeg">
+        <source src="audio.mp3" type="audio/mpeg">
         Tu navegador no soporta la reproducción de audio.
     </audio>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+    <script src="particles.js"></script>
     <script src="topo.js"></script>
 </body>
 </html>
