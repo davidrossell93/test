@@ -82,43 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cambiar el fondo de forma gradual entre negro y violeta en ambos contenedores
-    let colors = [
-        [0, 0, 0],         // Negro
-        [75, 0, 130]       // Violeta suave (#4B0082)
-    ];
-    let currentIndex = 0;
-    const stepsToViolet = 25;
-    const stepsToBlack = 300;
-
-    function interpolateColor(colorA, colorB, factor) {
-        const result = colorA.slice();
-        for (let i = 0; i < 3; i++) {
-            result[i] = Math.round(result[i] + factor * (colorB[i] - colorA[i]));
-        }
-        return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
-    }
-
-    function changeBackgroundColor() {
-        let step = 0;
-        const nextIndex = (currentIndex + 1) % colors.length;
-        const steps = currentIndex === 0 ? stepsToViolet : stepsToBlack;
-
-        const interval = setInterval(() => {
-            const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
-            document.body.style.backgroundColor = color;
-            fullScreenContainer.style.backgroundColor = color;
-            step++;
-
-            if (step > steps) {
-                clearInterval(interval);
-                currentIndex = nextIndex;
-                const delay = currentIndex === 0 ? 7000 : 500;
-                setTimeout(changeBackgroundColor, delay);
-            }
-        }, 50);
-    }
-
     // Iniciar el cambio de color de fondo después de 2 segundos
     setTimeout(changeBackgroundColor, 2000);
 });
