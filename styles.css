@@ -42,7 +42,7 @@ body, .full-screen {
     border-radius: 25px;
     padding: 20px;
     width: 90%;
-    max-width: 350px;
+    max-width: 250px;
     text-align: center;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
     position: relative;
