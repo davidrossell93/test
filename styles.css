@@ -141,11 +141,13 @@ body, .full-screen {
     z-index: 0;
 }
 
-/* Imagen dentro del contenedor de pantalla completa */
-.full-screen img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
+/* Imagen en pantalla completa como fondo */
+.fullscreen-content {
+    width: 90vw;
+    height: 90vh;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
     border: 3px solid rgba(255, 204, 204, 0.8); /* Blanco con un toque muy claro de rojo */
