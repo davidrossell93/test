@@ -9,8 +9,7 @@ body, .full-screen {
     height: 100vh;
     overflow: hidden;
     color: #fff;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewport="0 0 30 40" style="fill:none;stroke:purple;stroke-width:2;"><polygon points="0,0 25,20 15,20 20,40 10,30 5,35" fill="%23DA70D6" opacity="0.9" stroke="purple" stroke-width="1"/></svg>') 0 0, auto;
-}
+cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewport="0 0 30 40" style="fill:none;stroke:#8B0000;stroke-width:2;"><polygon points="0,0 25,20 15,20 20,40 10,30 5,35" fill="%23000000" opacity="0.9" stroke="#8B0000" stroke-width="1"/></svg>') 0 0, auto;}
 
 /* Contenedores de fondo de partículas y topo.js superpuestos */
 #particles-js,
