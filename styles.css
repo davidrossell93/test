@@ -27,7 +27,7 @@ body {
     animation: fadeIn 2s ease;
 }
 
-/* Imagen de perfil con borde sutil y sombra */
+/* Imagen de perfil con borde sutil y sin oscuridad */
 .profile-pic-container {
     position: relative;
     display: inline-block;
@@ -42,7 +42,6 @@ body {
     border-radius: 10px;
     border: 2px solid #000; /* Borde negro */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); /* Sombra negra sutil */
-    filter: brightness(0.9) contrast(1.05); /* Filtro ligero para mantener visibilidad */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     object-fit: cover;
     cursor: pointer;
