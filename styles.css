@@ -20,7 +20,6 @@ body, .full-screen {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -2; /* Asegura que esté debajo del contenido principal */
 }
 
 /* Partículas ajustadas para ser el fondo superior */
