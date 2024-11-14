@@ -1,4 +1,18 @@
-var Input = {
+document.addEventListener("DOMContentLoaded", function() {
+    // Seleccionar el contenedor para `topo.js`
+    const topoContainer = document.getElementById('topo-background');
+    const canvas = document.createElement("canvas");
+    topoContainer.appendChild(canvas);
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const ctx = canvas.getContext("2d");
+  var Input = {
   keys: [],
   mouse: {
     left: false,
