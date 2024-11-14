@@ -41,7 +41,7 @@ body {
     height: auto;
     border-radius: 10px;
     border: 2px solid #000; /* Borde negro */
-    box-shadow: 0px 0px 10px rgba(139, 0, 0, 0.4); /* Resplandor rojo oscuro sutil */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); /* Sombra sutil */
     filter: brightness(0.9) contrast(1.05); /* Filtro ligero para mantener visibilidad */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     object-fit: cover;
@@ -50,7 +50,7 @@ body {
 
 .profile-pic:hover {
     transform: scale(1.05);
-    box-shadow: 0px 0px 20px rgba(139, 0, 0, 0.6); /* Aumenta el resplandor rojo oscuro al hacer hover */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6); /* Sombra más intensa al hacer hover */
 }
 
 /* Nombre de usuario con efecto sombrío */
@@ -64,10 +64,10 @@ body {
 .username {
     font-size: 32px;
     font-weight: bold;
-    color: #ff4d4d; /* Rojo oscuro */
+    color: #e0e0e0; /* Gris claro */
     font-family: 'Pacifico', cursive;
-    -webkit-text-stroke: 1px #800000; /* Borde de texto rojo oscuro */
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(139, 0, 0, 0.7); /* Sombra roja */
+    -webkit-text-stroke: 1px #303030; /* Borde de texto gris oscuro */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0px 0px 15px rgba(50, 50, 50, 0.7); /* Sombra oscura */
 }
 
 .user-id {
@@ -87,14 +87,14 @@ body {
 
 .icon {
     font-size: 28px;
-    color: #ff4d4d; /* Color rojo oscuro */
+    color: #e0e0e0; /* Color gris claro */
     transition: transform 0.2s, color 0.3s;
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
 }
 
 .icon:hover {
     transform: scale(1.2);
-    color: #b22222; /* Cambia a un rojo más oscuro al hacer hover */
+    color: #a0a0a0; /* Cambia a un gris más oscuro al hacer hover */
 }
 
 /* Contenedor para la imagen ampliada */
