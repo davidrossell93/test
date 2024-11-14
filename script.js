@@ -81,7 +81,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Iniciar el cambio de color de fondo después de 2 segundos
-    setTimeout(changeBackgroundColor, 2000);
 });
