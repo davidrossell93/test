@@ -58,8 +58,8 @@ body, .full-screen {
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
+    width: 180px; /* Ajuste del tamaño */
+    height: 180px; /* Ajuste del tamaño */
     border-radius: 50%;
     border: 3px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
