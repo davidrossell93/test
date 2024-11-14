@@ -1,3 +1,24 @@
+// Configura el canvas para ocupar toda la pantalla
+var canvas = document.createElement("canvas");
+document.body.appendChild(canvas);
+var ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Ajusta el tamaño del canvas al cargar la página y al redimensionar la ventana
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// Mantiene el fondo negro y sin desplazamiento en la página
+document.body.style.backgroundColor = "black";
+document.body.style.margin = "0";
+document.body.style.overflow = "hidden";
+
+// Aquí continúa tu código de animación con los segmentos, criaturas, etc.
+
 var Input = {
   keys: [],
   mouse: {
