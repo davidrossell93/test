@@ -85,9 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Cambiar el fondo de forma gradual entre negro y violeta en ambos contenedores
-    let colors = [
-        [0, 0, 0],         // Negro
-        [75, 0, 130]       // Violeta suave (#4B0082)
+let colors = [
+    [0, 0, 0],          // Negro
+    [45, 0, 0],         // Rojo oscuro terrorífico
+    [20, 20, 20]        // Gris oscuro
+];
     ];
     let currentIndex = 0;
     const stepsToViolet = 25;
