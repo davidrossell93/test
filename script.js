@@ -33,14 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
         fullScreenContainer.style.display = 'none';
     });
 
+    // Configuración de partículas sin rojo
     particlesJS('particles-js', {
         particles: {
             number: { value: 100, density: { enable: true, value_area: 700 } },
-            color: { value: ["#333333", "#555555", "#8b0000", "#191919"] }, // Colores oscuros con toque de rojo
+            color: { value: ["#333333", "#555555", "#191919"] }, // Solo tonos grises oscuros
             shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
             opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
             size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
-            line_linked: { enable: true, distance: 150, color: "#8b0000", opacity: 0.7, width: 1 },
+            line_linked: { enable: true, distance: 150, color: "#606060", opacity: 0.7, width: 1 },
             move: { enable: true, speed: 1.5, random: true }
         },
         interactivity: {
@@ -58,11 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesJS('particles-fullscreen', {
             particles: {
                 number: { value: 100, density: { enable: true, value_area: 700 } },
-                color: { value: ["#333333", "#555555", "#8b0000", "#191919"] }, // Mismos colores oscuros con toque de rojo
+                color: { value: ["#333333", "#555555", "#191919"] }, // Solo tonos grises oscuros
                 shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
                 opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
                 size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
-                line_linked: { enable: true, distance: 150, color: "#8b0000", opacity: 0.7, width: 1 },
+                line_linked: { enable: true, distance: 150, color: "#606060", opacity: 0.7, width: 1 },
                 move: { enable: true, speed: 1.5, random: true }
             },
             interactivity: {
@@ -76,15 +77,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Colores para el fondo: gris oscuro y un toque de rojo intermitente
+    // Colores para el fondo solo en tonos grises
     let colors = [
         [25, 25, 25],        // Gris oscuro
-        [139, 0, 0],         // Rojo oscuro (#8B0000) para el toque intermitente
-        [50, 50, 50]         // Gris medio oscuro
+        [50, 50, 50],        // Gris medio oscuro
+        [10, 10, 10]         // Gris muy oscuro casi negro
     ];
     let currentIndex = 0;
     const stepsToGray = 25;
-    const stepsToRed = 5; // Menor cantidad de pasos para un breve parpadeo en rojo
 
     function interpolateColor(colorA, colorB, factor) {
         const result = colorA.slice();
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function changeBackgroundColor() {
         let step = 0;
         const nextIndex = (currentIndex + 1) % colors.length;
-        const steps = currentIndex === 1 ? stepsToRed : stepsToGray; // Paso breve en rojo
+        const steps = stepsToGray; // Solo pasos en tonos grises
 
         const interval = setInterval(() => {
             const color = interpolateColor(colors[currentIndex], colors[nextIndex], step / steps);
@@ -108,8 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (step > steps) {
                 clearInterval(interval);
                 currentIndex = nextIndex;
-                const delay = currentIndex === 1 ? 100 : 2000; // Retraso más corto en rojo
-                setTimeout(changeBackgroundColor, delay);
+                setTimeout(changeBackgroundColor, 2000); // Intervalo de cambio sin rojo
             }
         }, 50);
     }
