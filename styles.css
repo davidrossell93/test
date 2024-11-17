@@ -36,7 +36,7 @@ body, .full-screen {
 
 /* Tarjeta de perfil unificada */
 .profile-container {
-        margin-top: 110px; /* Ajusta este valor a lo que necesites */
+        margin-top: 800px; /* Ajusta este valor a lo que necesites */
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px) brightness(1.2);
     border: 1px solid rgba(255, 255, 255, 0.4);
