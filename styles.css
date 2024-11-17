@@ -12,6 +12,17 @@ body, .full-screen {
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" viewport="0 0 30 40" style="fill:none;stroke:%238B0000;stroke-width:2;"><polygon points="0,0 25,20 15,20 20,40 10,30 5,35" fill="%23000000" opacity="0.9" stroke="%238B0000" stroke-width="2"/></svg>') 0 0, auto;
 }
 
+.icon-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el ícono */
+    margin-top: 20px; /* Ajusta el espacio entre la tarjeta y el ícono */
+}
+
+.icono {
+    width: 40px; /* Tamaño pequeño */
+    height: auto; /* Mantiene las proporciones */
+}
+
 /* Contenedores de fondo de partículas y topo.js superpuestos */
 #particles-js,
 #topo-background {
