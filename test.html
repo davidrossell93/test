@@ -22,27 +22,45 @@
             overflow: hidden; /* Añadido para evitar scroll */
         }
 
-        /* Estilo para el fondo */
-        .background-effect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                rgba(0, 255, 255, 0.1),
-                rgba(0, 255, 0, 0.1),
-                rgba(0, 255, 255, 0.1)
-            );
-            animation: aurora 10s linear infinite;
-            z-index: -1;
-        }
+.background-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(125deg,
+        rgba(255, 0, 255, 0.2),
+        rgba(0, 83, 255, 0.2),
+        rgba(255, 0, 140, 0.2),
+        rgba(0, 255, 255, 0.2)
+    );
+    filter: blur(3px);
+    animation: galaxy 15s linear infinite;
+    z-index: -1;
+}
 
-        @keyframes aurora {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+@keyframes galaxy {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Agregar estrellas */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    z-index: -1;
+}
+
 
         .card-container {
             width: 300px;
