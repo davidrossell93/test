@@ -384,6 +384,12 @@
             .cyber-subtext {
                 font-size: 0.8em;
             }
+
+            .card-container {
+                width: 250px;
+                height: 350px;
+                touch-action: none;
+            }
         }
     </style>
 </head>
@@ -444,24 +450,61 @@
 
     <!-- Scripts -->
     <script>
-        // Efecto de rotación de la tarjeta
-        document.querySelector('.card-container').addEventListener('mousemove', (e) => {
-            const card = e.currentTarget;
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = -(x - centerX) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Efectos de la tarjeta
+            const card = document.querySelector('.card-container');
+            const glitchEffect = document.querySelector('.glitch-effect');
 
-        document.querySelector('.card-container').addEventListener('mouseleave', (e) => {
-            e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            // Función para activar el efecto glitch
+            function startGlitch() {
+                glitchEffect.style.opacity = '0.1';
+                glitchEffect.style.animation = 'glitch 0.3s linear infinite';
+                card.style.animation = 'none';
+                card.style.transform = 'scale(0.98)';
+            }
+
+            // Función para detener el efecto glitch
+            function stopGlitch() {
+                glitchEffect.style.opacity = '0';
+                glitchEffect.style.animation = 'none';
+                card.style.animation = 'float 6s ease-in-out infinite';
+                card.style.transform = 'scale(1)';
+            }
+
+            // Eventos de mouse
+            card.addEventListener('mousedown', startGlitch);
+            card.addEventListener('mouseup', stopGlitch);
+            card.addEventListener('mouseleave', stopGlitch);
+
+            // Eventos táctiles
+            card.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                startGlitch();
+            });
+
+            card.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                stopGlitch();
+            });
+
+            // Efecto de rotación de la tarjeta
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = -(x - centerX) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', (e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
         });
 
         // Efecto de partículas avanzadas
@@ -531,11 +574,9 @@
 
         // Ajustar canvas al redimensionar ventana
         window.addEventListener('resize', () => {
-            const canvases = document.querySelectorAll('canvas');
-            canvases.forEach(canvas => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
+            const canvas = document.querySelector('.particles-advanced');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             createParticles();
         });
 
