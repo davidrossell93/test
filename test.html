@@ -12,14 +12,32 @@
         }
 
         body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #000000;
-            font-family: 'Arial', sans-serif;
-            perspective: 1000px;
-        }
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 255, 255, 0.1),
+        rgba(0, 255, 0, 0.1),
+        rgba(0, 255, 255, 0.1)
+    );
+    animation: aurora 10s linear infinite;
+}
+
+@keyframes aurora {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 
         .card-container {
             width: 300px;
@@ -108,7 +126,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://xatimg.com/image/iqElFQZlNamW.png');
+            background: url('https://xatimg.com/image/i74pTbUCUQzf.jpg');
             background-size: cover;
             opacity: 0;
             mix-blend-mode: hard-light;
@@ -163,7 +181,7 @@
 <body>
     <div class="card-container">
         <div class="card front">
-            <img src="https://xatimg.com/image/iqElFQZlNamW.png" class="profile-img" alt="Profile">
+            <img src="https://xatimg.com/image/i74pTbUCUQzf.jpg" class="profile-img" alt="Profile">
             <div class="glowing-border"></div>
             <div class="hover-effect"></div>
             <div class="glitch-effect"></div>
