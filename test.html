@@ -29,59 +29,84 @@
     width: 200%;
     height: 200%;
     background: linear-gradient(125deg,
-        rgba(0, 17, 41, 0.8),
-        rgba(0, 30, 82, 0.6),
-        rgba(17, 0, 56, 0.7),
-        rgba(0, 89, 148, 0.5)
+        rgba(13, 17, 23, 0.8),
+        rgba(0, 19, 54, 0.7),
+        rgba(14, 0, 45, 0.8)
     );
-    filter: blur(4px);
-    animation: galaxy 20s linear infinite;
     z-index: -1;
 }
 
-@keyframes galaxy {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Estrellas mejoradas con efecto de profundidad */
-body::before {
-    content: '';
+/* Efecto de matriz digital */
+.digital-rain {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-        radial-gradient(rgba(63, 137, 255, 0.8), rgba(63, 137, 255, 0.1) 2px, transparent 4px),
-        radial-gradient(rgba(37, 124, 255, 0.6), rgba(37, 124, 255, 0.1) 1px, transparent 3px),
-        radial-gradient(rgba(0, 89, 148, 0.4), rgba(0, 89, 148, 0.1) 2px, transparent 4px);
-    background-size: 650px 650px, 450px 450px, 350px 350px;
-    background-position: 0 0, 40px 60px, 130px 270px;
     z-index: -1;
-    animation: starPulse 4s ease-in-out infinite;
+    opacity: 0.3;
 }
 
-@keyframes starPulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.8; }
-}
-
-/* Añadir efecto de nebulosa profunda */
-body::after {
-    content: '';
+/* Efecto de rejilla holográfica */
+.grid {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%,
-        rgba(0, 17, 41, 0),
-        rgba(0, 30, 82, 0.2),
-        rgba(0, 0, 0, 0.4)
-    );
+    background: 
+        linear-gradient(90deg, rgba(33, 138, 242, 0.1) 1px, transparent 1px) 0 0 / 50px 50px,
+        linear-gradient(0deg, rgba(33, 138, 242, 0.1) 1px, transparent 1px) 0 0 / 50px 50px;
+    transform: perspective(500px) rotateX(60deg);
+    transform-origin: center top;
+    animation: gridMove 20s linear infinite;
     z-index: -2;
 }
+
+/* Efecto de pulso energético */
+.energy-pulse {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center,
+        rgba(0, 212, 255, 0),
+        rgba(9, 9, 121, 0.2) 35%,
+        rgba(2, 0, 36, 0.5) 100%
+    );
+    animation: pulse 4s ease-in-out infinite;
+    z-index: -3;
+}
+
+/* Partículas flotantes con brillo */
+.particles-advanced {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes gridMove {
+    0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+    100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+}
+
+/* Estilos adicionales para el body */
+body {
+    background-color: #000;
+    overflow: hidden;
+}
+
 
 
 
@@ -271,5 +296,127 @@ body::after {
             e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
     </script>
+
+
+<div class="background-effect"></div>
+<div class="digital-rain"></div>
+<div class="grid"></div>
+<div class="energy-pulse"></div>
+<canvas class="particles-advanced"></canvas>
+
+<script>
+// Efecto de lluvia digital
+function createDigitalRain() {
+    const canvas = document.querySelector('.digital-rain');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chars = '01アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const columns = canvas.width / 20;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#0F0';
+        ctx.font = '15px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * 20, drops[i] * 20);
+            if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(draw, 33);
+}
+
+// Efecto de partículas avanzadas
+function createParticles() {
+    const canvas = document.querySelector('.particles-advanced');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 100;
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3,
+            speedX: Math.random() * 2 - 1,
+            speedY: Math.random() * 2 - 1,
+            life: Math.random() * 0.5
+        });
+    }
+
+    function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach((p, index) => {
+            p.x += p.speedX;
+            p.y += p.speedY;
+            p.life += 0.01;
+            
+            if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height || p.life > 1) {
+                p.x = Math.random() * canvas.width;
+                p.y = Math.random() * canvas.height;
+                p.life = 0;
+            }
+
+            const opacity = 1 - p.life;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(33, 138, 242, ${opacity})`;
+            ctx.fill();
+            
+            // Conectar partículas cercanas
+            particles.slice(index + 1).forEach(p2 => {
+                const dx = p.x - p2.x;
+                const dy = p.y - p2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `rgba(33, 138, 242, ${opacity * 0.2})`;
+                    ctx.stroke();
+                }
+            });
+        });
+        
+        requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
+}
+
+// Inicializar efectos
+createDigitalRain();
+createParticles();
+
+// Ajustar canvas al redimensionar ventana
+window.addEventListener('resize', () => {
+    const canvases = document.querySelectorAll('canvas');
+    canvases.forEach(canvas => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    createDigitalRain();
+    createParticles();
+});
+</script>
+
+
+    
+    
 </body>
 </html>
