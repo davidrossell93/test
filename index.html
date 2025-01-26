@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Futurista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +45,6 @@
             animation: space 20s linear infinite;
             z-index: -1;
         }
-
         @keyframes space {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -159,6 +159,7 @@
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1;
+            animation: float 6s ease-in-out infinite;
         }
 
         .card-container:hover {
@@ -265,10 +266,6 @@
             50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        .card-container {
-            animation: float 6s ease-in-out infinite;
-        }
-
         .particles {
             position: absolute;
             width: 100%;
@@ -290,6 +287,104 @@
             50% { opacity: 1; }
             100% { transform: translateY(-100px) scale(1); opacity: 0; }
         }
+
+        /* Texto cyberpunk */
+        .floating-text {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 100;
+        }
+
+        .cyber-text {
+            font-size: 2em;
+            color: #00f2fe;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .cyber-subtext {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        /* Terminal */
+        .terminal {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(33, 138, 242, 0.3);
+            z-index: 100;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .terminal-content {
+            font-family: monospace;
+            color: #00f2fe;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            margin: 5px 0;
+        }
+
+        .terminal-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .terminal-input input {
+            background: transparent;
+            border: none;
+            color: #00f2fe;
+            font-family: monospace;
+            width: 100%;
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .terminal {
+                width: 90%;
+                bottom: 10px;
+            }
+
+            .floating-text {
+                width: 90%;
+            }
+
+            .cyber-text {
+                font-size: 1.5em;
+            }
+
+            .cyber-subtext {
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -298,6 +393,12 @@
     <div class="grid"></div>
     <div class="energy-pulse"></div>
     <canvas class="particles-advanced"></canvas>
+
+    <!-- Texto Cyberpunk -->
+    <div class="floating-text">
+        <div class="cyber-text">BIENVENIDO A MI XATSPACE</div>
+        <div class="cyber-subtext">LLEGASTE AL LUGAR INCORRECTO</div>
+    </div>
 
     <!-- Tarjeta -->
     <div class="card-container">
@@ -320,6 +421,24 @@
         </div>
         <div class="card back">
             <div class="glowing-border"></div>
+        </div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-button"></span>
+            <span class="terminal-button"></span>
+            <span class="terminal-button"></span>
+        </div>
+        <div class="terminal-content">
+            <div class="terminal-line">$ iniciando sistema...</div>
+            <div class="terminal-line">$ cargando perfil...</div>
+            <div class="terminal-line">$ acceso concedido</div>
+            <div class="terminal-input">
+                <span class="prompt">$</span>
+                <input type="text" placeholder="Escribe un comando...">
+            </div>
         </div>
     </div>
 
@@ -383,7 +502,7 @@
                     const opacity = 1 - p.life;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(33, 138, 242, ${opacity})`; // Partículas azules
+                    ctx.fillStyle = `rgba(33, 138, 242, ${opacity})`;
                     ctx.fill();
                     
                     particles.slice(index + 1).forEach(p2 => {
@@ -395,7 +514,7 @@
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
-                            ctx.strokeStyle = `rgba(33, 138, 242, ${opacity * 0.2})`; // Conexiones azules
+                            ctx.strokeStyle = `rgba(33, 138, 242, ${opacity * 0.2})`;
                             ctx.stroke();
                         }
                     });
@@ -418,6 +537,26 @@
                 canvas.height = window.innerHeight;
             });
             createParticles();
+        });
+
+        // Terminal interactiva
+        const terminalInput = document.querySelector('.terminal-input input');
+        terminalInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                const command = this.value;
+                const newLine = document.createElement('div');
+                newLine.classList.add('terminal-line');
+                newLine.textContent = `$ ${command}`;
+                this.parentElement.before(newLine);
+                this.value = '';
+
+                setTimeout(() => {
+                    const response = document.createElement('div');
+                    response.classList.add('terminal-line');
+                    response.textContent = `Ejecutando comando: ${command}...`;
+                    this.parentElement.before(response);
+                }, 500);
+            }
         });
     </script>
 </body>
