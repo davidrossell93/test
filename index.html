@@ -2,87 +2,401 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <title>Hola</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Futurista</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+            font-family: 'Arial', sans-serif;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .background-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(125deg,
+                rgba(13, 17, 23, 0.8),
+                rgba(0, 19, 54, 0.7),
+                rgba(14, 0, 45, 0.8)
+            );
+            z-index: -1;
+        }
+
+        .digital-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(33, 138, 242, 0.1) 1px, transparent 1px) 0 0 / 50px 50px,
+                linear-gradient(0deg, rgba(33, 138, 242, 0.1) 1px, transparent 1px) 0 0 / 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center top;
+            animation: gridMove 20s linear infinite;
+            z-index: -2;
+        }
+
+        .energy-pulse {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center,
+                rgba(0, 212, 255, 0),
+                rgba(9, 9, 121, 0.2) 35%,
+                rgba(2, 0, 36, 0.5) 100%
+            );
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -3;
+        }
+
+        .particles-advanced {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .card-container {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+
+        .card-container:hover {
+            transform: rotateY(180deg) scale(1.05);
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+        }
+
+        .front {
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .glowing-border {
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe) border-box;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { filter: brightness(1) blur(1px); }
+            50% { filter: brightness(1.5) blur(3px); }
+        }
+
+        .hover-effect {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 242, 254, 0.5), 
+                rgba(79, 172, 254, 0.5));
+            opacity: 0;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover .hover-effect {
+            opacity: 1;
+        }
+
+        .card:hover .profile-img {
+            transform: scale(1.1) translateZ(20px);
+        }
+
+        .glitch-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://xatimg.com/image/i74pTbUCUQzf.jpg');
+            background-size: cover;
+            opacity: 0;
+            mix-blend-mode: hard-light;
+            animation: glitch 0.3s linear infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
+
+        .card:hover .glitch-effect {
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .card-container {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            animation: particle 2s linear infinite;
+        }
+
+        @keyframes particle {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Partículas del fondo principal -->
-    <div id="particles-js"></div>
+    <!-- Efectos de fondo -->
+    <div class="background-effect"></div>
+    <canvas class="digital-rain"></canvas>
+    <div class="grid"></div>
+    <div class="energy-pulse"></div>
+    <canvas class="particles-advanced"></canvas>
 
-    <!-- Contenedor para agregar espacio encima de la tarjeta -->
-    <div class="space-above-profile"></div>
-
-    <!-- Tarjeta de perfil única -->
-    <div class="profile-container">
-        <div class="profile-pic-container">
-            <img src="https://xatimg.com/image/WwE8ZWRqpyWw.jpg" alt="Foto de Perfil" class="profile-pic" id="profileImage">
-        </div>
-    </div>
-
-    <!-- Contenedor de la imagen en pantalla completa -->
-    <div id="fullScreenContainer" class="full-screen">
-        <!-- Partículas del fondo de la imagen ampliada -->
-        <div id="particles-fullscreen"></div>
-        <div class="fullscreen-content">
-            <img id="profileImageLarge" src="https://xatimg.com/image/3mGqpWyTLfUu.jpg" alt="Perfil Ampliado">
-        </div>
-    </div>
-
-    <audio id="autoplayAudio" autoplay loop style="display:none;">
-        <source src="mp33.mp3" type="audio/mpeg">
-        Tu navegador no soporta la reproducción de audio.
-    </audio>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-    <script src="topo.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const profileImage = document.getElementById('profileImage');
-            const fullScreenContainer = document.getElementById('fullScreenContainer');
-
-            // Mostrar la imagen ampliada al hacer clic en la imagen de perfil
-            profileImage.addEventListener('click', () => {
-                fullScreenContainer.style.display = 'flex';
-                initFullScreenParticles();
-
-                // Desactivar el segundo clic para evitar cerrar al hacer clic en el contenedor ampliado
-                fullScreenContainer.removeEventListener('click', hideFullScreen);
-                setTimeout(() => {
-                    fullScreenContainer.addEventListener('click', hideFullScreen);
-                }, 500); // Desactiva el primer clic
-            });
-
-            // Función para ocultar la imagen ampliada
-            function hideFullScreen() {
-                fullScreenContainer.style.display = 'none';
-                fullScreenContainer.removeEventListener('click', hideFullScreen); // Desactivar evento tras el cierre
-            }
-
-            // Inicializa partículas para el fondo de la imagen ampliada
-            function initFullScreenParticles() {
-                particlesJS('particles-fullscreen', {
-                    particles: {
-                        number: { value: 100, density: { enable: true, value_area: 700 } },
-                        color: { value: ["#8B0000", "#FFFFFF", "#000000"] }, // Colores satinado: rojo oscuro, blanco claro y negro
-                        shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
-                        opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-                        size: { value: 3, random: true, anim: { enable: true, speed: 3, size_min: 0.1, sync: false } },
-                        line_linked: { enable: true, distance: 150, color: "#8B0000", opacity: 0.6, width: 1 },
-                        move: { enable: true, speed: 1.5, random: true }
-                    },
-                    interactivity: {
-                        detect_on: 'canvas',
-                        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                        modes: {
-                            repulse: { distance: 100, duration: 0.4 },
-                            push: { particles_nb: 4 }
-                        }
+    <!-- Tarjeta -->
+    <div class="card-container">
+        <div class="card front">
+            <img src="https://xatimg.com/image/i74pTbUCUQzf.jpg" class="profile-img" alt="Profile">
+            <div class="glowing-border"></div>
+            <div class="hover-effect"></div>
+            <div class="glitch-effect"></div>
+            <div class="particles">
+                <script>
+                    for(let i = 0; i < 20; i++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        particle.style.left = Math.random() * 100 + '%';
+                        particle.style.animationDelay = Math.random() * 2 + 's';
+                        document.querySelector('.particles').appendChild(particle);
                     }
+                </script>
+            </div>
+        </div>
+        <div class="card back">
+            <div class="glowing-border"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Efecto de rotación de la tarjeta
+        document.querySelector('.card-container').addEventListener('mousemove', (e) => {
+            const card = e.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = -(x - centerX) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        document.querySelector('.card-container').addEventListener('mouseleave', (e) => {
+            e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+
+        // Efecto de lluvia digital
+        function createDigitalRain() {
+            const canvas = document.querySelector('.digital-rain');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = '01アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+            const columns = canvas.width / 20;
+            const drops = Array(Math.floor(columns)).fill(1);
+
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#0F0';
+                ctx.font = '15px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * 20, drops[i] * 20);
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 33);
+        }
+
+        // Efecto de partículas avanzadas
+        function createParticles() {
+            const canvas = document.querySelector('.particles-advanced');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 100;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3,
+                    speedX: Math.random() * 2 - 1,
+                    speedY: Math.random() * 2 - 1,
+                    life: Math.random() * 0.5
                 });
             }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach((p, index) => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.life += 0.01;
+                    
+                    if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height || p.life > 1) {
+                        p.x = Math.random() * canvas.width;
+                        p.y = Math.random() * canvas.height;
+                        p.life = 0;
+                    }
+
+                    const opacity = 1 - p.life;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(33, 138, 242, ${opacity})`;
+                    ctx.fill();
+                    
+                    particles.slice(index + 1).forEach(p2 => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(33, 138, 242, ${opacity * 0.2})`;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(drawParticles);
+            }
+
+            drawParticles();
+        }
+
+        // Inicializar efectos
+        createDigitalRain();
+        createParticles();
+
+        // Ajustar canvas al redimensionar ventana
+        window.addEventListener('resize', () => {
+            const canvases = document.querySelectorAll('canvas');
+            canvases.forEach(canvas => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            createDigitalRain();
+            createParticles();
         });
     </script>
 </body>
