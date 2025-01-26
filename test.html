@@ -133,10 +133,7 @@
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1;
-        }
-
-        .card-container:hover {
-            transform: rotateY(180deg) scale(1.05);
+            animation: float 6s ease-in-out infinite;
         }
 
         .card {
@@ -193,14 +190,6 @@
             opacity: 0;
             transition: opacity 0.3s;
             backdrop-filter: blur(5px);
-        }
-
-        .card:hover .hover-effect {
-            opacity: 1;
-        }
-
-        .card:hover .profile-img {
-            transform: scale(1.1) translateZ(20px);
         }
 
         .glitch-effect {
@@ -323,53 +312,36 @@
 
     <!-- Scripts -->
     <script>
-        // Función para manejar efectos de la tarjeta
         function handleCardEffects() {
             const card = document.querySelector('.card-container');
+            const glitchEffect = document.querySelector('.glitch-effect');
             
-            // Función para actualizar la rotación
-            function updateRotation(x, y, rect) {
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 10;
-                const rotateY = -(x - centerX) / 10;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            function startGlitch() {
+                glitchEffect.style.opacity = '0.1';
+                card.style.animation = 'none';
+                card.style.transform = 'scale(0.98)';
+            }
+
+            function stopGlitch() {
+                glitchEffect.style.opacity = '0';
+                card.style.animation = 'float 6s ease-in-out infinite';
+                card.style.transform = 'scale(1)';
             }
 
             // Eventos para mouse
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                updateRotation(x, y, rect);
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
+            card.addEventListener('mousedown', startGlitch);
+            card.addEventListener('mouseup', stopGlitch);
+            card.addEventListener('mouseleave', stopGlitch);
 
             // Eventos táctiles
-            card.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-                const rect = card.getBoundingClientRect();
-                const touch = e.touches[0];
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
-                updateRotation(x, y, rect);
-            });
-
             card.addEventListener('touchstart', (e) => {
-                const rect = card.getBoundingClientRect();
-                const touch = e.touches[0];
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
-                updateRotation(x, y, rect);
+                e.preventDefault();
+                startGlitch();
             });
 
-            card.addEventListener('touchend', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            card.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                stopGlitch();
             });
 
             // Doble tap para girar la tarjeta
