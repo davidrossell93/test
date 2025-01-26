@@ -12,32 +12,37 @@
         }
 
         body {
-    background: #000;
-    position: relative;
-    overflow: hidden;
-}
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+            font-family: 'Arial', sans-serif;
+            perspective: 1000px;
+            overflow: hidden; /* Añadido para evitar scroll */
+        }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        rgba(0, 255, 255, 0.1),
-        rgba(0, 255, 0, 0.1),
-        rgba(0, 255, 255, 0.1)
-    );
-    animation: aurora 10s linear infinite;
-}
+        /* Estilo para el fondo */
+        .background-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                rgba(0, 255, 255, 0.1),
+                rgba(0, 255, 0, 0.1),
+                rgba(0, 255, 255, 0.1)
+            );
+            animation: aurora 10s linear infinite;
+            z-index: -1;
+        }
 
-@keyframes aurora {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
+        @keyframes aurora {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
 
         .card-container {
             width: 300px;
@@ -179,6 +184,8 @@ body::before {
     </style>
 </head>
 <body>
+    <div class="background-effect"></div>
+    
     <div class="card-container">
         <div class="card front">
             <img src="https://xatimg.com/image/i74pTbUCUQzf.jpg" class="profile-img" alt="Profile">
