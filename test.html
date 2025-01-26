@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil xat - Diseño Innovador</title>
+    <title>Perfil Futurista</title>
     <style>
         * {
             margin: 0;
@@ -12,200 +12,197 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #0f0c29;
-            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-        }
-
-        .profile-card {
-            width: 350px;
-            height: 500px;
+            background: #000000;
+            font-family: 'Arial', sans-serif;
             perspective: 1000px;
-            position: relative;
         }
 
-        .card-inner {
+        .card-container {
+            width: 300px;
+            height: 400px;
             position: relative;
-            width: 100%;
-            height: 100%;
             transform-style: preserve-3d;
-            transition: transform 1s;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .profile-card:hover .card-inner {
-            transform: rotateY(180deg);
+        .card-container:hover {
+            transform: rotateY(180deg) scale(1.05);
         }
 
-        .card-front, .card-back {
+        .card {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
         }
 
-        .card-front {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .card-back {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transform: rotateY(180deg);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 65%;
+        .front {
             position: relative;
-            overflow: hidden;
+            transform-style: preserve-3d;
         }
 
-        .profile-image img {
+        .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+        }
+
+        .profile-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
         }
 
-        .profile-image::before {
-            content: '';
+        .glowing-border {
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe) border-box;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { filter: brightness(1) blur(1px); }
+            50% { filter: brightness(1.5) blur(3px); }
+        }
+
+        .hover-effect {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 242, 254, 0.5), 
+                rgba(79, 172, 254, 0.5));
+            opacity: 0;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover .hover-effect {
+            opacity: 1;
+        }
+
+        .card:hover .profile-img {
+            transform: scale(1.1) translateZ(20px);
+        }
+
+        .glitch-effect {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                45deg,
-                rgba(255, 255, 255, 0.5),
-                rgba(255, 255, 255, 0.2)
-            );
-            z-index: 1;
+            background: url('https://xatimg.com/image/i74pTbUCUQzf.jpg');
+            background-size: cover;
             opacity: 0;
-            transition: opacity 0.5s;
+            mix-blend-mode: hard-light;
+            animation: glitch 0.3s linear infinite;
         }
 
-        .profile-card:hover .profile-image::before {
-            opacity: 1;
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
         }
 
-        .profile-info {
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-
-        h1 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #ffb88c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            color: #ffffff;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .social-link {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(45deg, #ff6b6b, #ffb88c);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        .card-back h2 {
-            color: #ffb88c;
-            margin-bottom: 20px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .stat-item {
-            text-align: center;
-            color: white;
-        }
-
-        .stat-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ff6b6b;
+        .card:hover .glitch-effect {
+            opacity: 0.1;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        .profile-card {
+        .card-container {
             animation: float 6s ease-in-out infinite;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            animation: particle 2s linear infinite;
+        }
+
+        @keyframes particle {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="profile-card">
-        <div class="card-inner">
-            <div class="card-front">
-                <div class="profile-image">
-                    <img src="https://xatimg.com/image/i74pTbUCUQzf.jpg" alt="Foto de perfil">
-                </div>
-                <div class="profile-info">
-                    <h1>Tu Nombre</h1>
-                    <p>¡Hola! Bienvenido a mi perfil de xat. Soy alguien a quien le apasiona la creatividad y la música.</p>
-                    <a href="https://xat.com" class="social-link" target="_blank">Visitar Perfil</a>
-                </div>
-            </div>
-            <div class="card-back">
-                <h2>Más Sobre Mí</h2>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-value">500+</div>
-                        <div>Amigos</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">50+</div>
-                        <div>Posts</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">1K</div>
-                        <div>Likes</div>
-                    </div>
-                </div>
-                <p>Me encanta conectar con nuevas personas y compartir momentos especiales. ¡Siempre estoy abierto a nuevas amistades!</p>
-                <a href="https://xat.com" class="social-link" target="_blank">Conectar</a>
+    <div class="card-container">
+        <div class="card front">
+            <img src="https://xatimg.com/image/i74pTbUCUQzf.jpg" class="profile-img" alt="Profile">
+            <div class="glowing-border"></div>
+            <div class="hover-effect"></div>
+            <div class="glitch-effect"></div>
+            <div class="particles">
+                <script>
+                    for(let i = 0; i < 20; i++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        particle.style.left = Math.random() * 100 + '%';
+                        particle.style.animationDelay = Math.random() * 2 + 's';
+                        document.querySelector('.particles').appendChild(particle);
+                    }
+                </script>
             </div>
         </div>
+        <div class="card back">
+            <div class="glowing-border"></div>
+        </div>
     </div>
+
+    <script>
+        document.querySelector('.card-container').addEventListener('mousemove', (e) => {
+            const card = e.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = -(x - centerX) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        document.querySelector('.card-container').addEventListener('mouseleave', (e) => {
+            e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    </script>
 </body>
 </html>
