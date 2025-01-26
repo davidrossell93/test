@@ -193,8 +193,6 @@
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 10;
             animation: float 6s ease-in-out infinite;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .card {
@@ -279,6 +277,23 @@
             animation: glitch 0.3s linear infinite;
         }
 
+        /* Efectos de hover y animaciones */
+        .card-container:hover {
+            transform: rotateY(180deg) scale(1.05);
+        }
+
+        .card:hover .hover-effect {
+            opacity: 1;
+        }
+
+        .card:hover .profile-img {
+            transform: scale(1.1) translateZ(20px);
+        }
+
+        .card:hover .glitch-effect {
+            opacity: 0.1;
+        }
+
         /* Terminal */
         .terminal {
             position: fixed;
@@ -331,17 +346,6 @@
             width: 100%;
             outline: none;
         }
-
-        /* Soporte específico para móviles */
-        @media (hover: none) {
-            .card-container {
-                transition: transform 0.5s ease;
-            }
-            
-            .card-container:active {
-                transform: rotateY(180deg) scale(1.05);
-            }
-        }
         /* Animaciones */
         @keyframes space {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
@@ -370,10 +374,10 @@
 
         @keyframes glitch {
             0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); }
-            80% { transform: translate(3px, -3px); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
             100% { transform: translate(0); }
         }
 
@@ -494,30 +498,10 @@
             return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
         }
 
-        const card = document.querySelector('.card-container');
-
-        if (isMobileDevice()) {
-            // Eventos táctiles para móvil
-            card.addEventListener('touchstart', handleTouchStart);
-            card.addEventListener('touchend', handleTouchEnd);
-
-            let touchTimeout;
-
-            function handleTouchStart(e) {
-                clearTimeout(touchTimeout);
-                // Girar la tarjeta al tocar
-                e.currentTarget.style.transform = 'rotateY(180deg) scale(1.05)';
-            }
-
-            function handleTouchEnd(e) {
-                // Volver a la posición original después de un tiempo
-                touchTimeout = setTimeout(() => {
-                    e.currentTarget.style.transform = 'rotateY(0) scale(1)';
-                }, 2000); // 2 segundos antes de volver
-            }
-        } else {
-            // Eventos de mouse para desktop
-            card.addEventListener('mousemove', (e) => {
+        // Solo aplicar efectos de mouse si no es dispositivo móvil
+        if (!isMobileDevice()) {
+            document.querySelector('.card-container').addEventListener('mousemove', (e) => {
+                const card = e.currentTarget;
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
@@ -531,13 +515,122 @@
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
 
-            card.addEventListener('mouseleave', (e) => {
+            document.querySelector('.card-container').addEventListener('mouseleave', (e) => {
                 e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
         }
 
-        // Efecto de partículas avanzadas y demás scripts...
-        [El resto del código JavaScript que ya tenías]
+        // Efecto de partículas avanzadas
+        function createParticles() {
+            const canvas = document.querySelector('.particles-advanced');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 100;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3,
+                    speedX: Math.random() * 2 - 1,
+                    speedY: Math.random() * 2 - 1,
+                    life: Math.random() * 0.5
+                });
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach((p, index) => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.life += 0.01;
+                    
+                    if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height || p.life > 1) {
+                        p.x = Math.random() * canvas.width;
+                        p.y = Math.random() * canvas.height;
+                        p.life = 0;
+                    }
+
+                    const opacity = 1 - p.life;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(33, 138, 242, ${opacity})`;
+                    ctx.fill();
+                    
+                    particles.slice(index + 1).forEach(p2 => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(33, 138, 242, ${opacity * 0.2})`;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(drawParticles);
+            }
+
+            drawParticles();
+        }
+
+        // Inicializar efectos
+        createParticles();
+
+        // Ajustar canvas al redimensionar ventana
+        window.addEventListener('resize', () => {
+            const canvases = document.querySelectorAll('canvas');
+            canvases.forEach(canvas => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            createParticles();
+        });
+
+        // Animación de números en estadísticas
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            const increment = target / 100;
+            
+            function updateCounter() {
+                const current = parseInt(stat.innerText);
+                if(current < target) {
+                    stat.innerText = Math.ceil(current + increment);
+                    setTimeout(updateCounter, 10);
+                }
+            }
+            
+            updateCounter();
+        });
+
+        // Terminal interactiva
+        const terminalInput = document.querySelector('.terminal-input input');
+        terminalInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                const command = this.value;
+                const newLine = document.createElement('div');
+                newLine.classList.add('terminal-line');
+                newLine.textContent = `$ ${command}`;
+                this.parentElement.before(newLine);
+                this.value = '';
+
+                setTimeout(() => {
+                    const response = document.createElement('div');
+                    response.classList.add('terminal-line');
+                    response.textContent = `Ejecutando comando: ${command}...`;
+                    this.parentElement.before(response);
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
