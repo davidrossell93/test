@@ -90,6 +90,7 @@
             z-index: -2;
             pointer-events: none;
         }
+
         /* Menú flotante */
         .floating-menu {
             position: fixed;
@@ -123,7 +124,6 @@
             color: #00f2fe;
             font-size: 1.2em;
         }
-
         /* Estadísticas */
         .stats-container {
             position: fixed;
@@ -193,7 +193,6 @@
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 10;
             animation: float 6s ease-in-out infinite;
-            touch-action: none; /* Nuevo: previene gestos por defecto del navegador */
         }
 
         .card {
@@ -204,11 +203,6 @@
             border-radius: 15px;
             overflow: hidden;
             background: linear-gradient(45deg, #00f2fe, #4facfe);
-            transition: transform 0.3s ease-out; /* Nuevo: para efecto táctil */
-        }
-
-        .card:active {
-            transform: scale(0.98); /* Nuevo: efecto al presionar */
         }
 
         .front {
@@ -234,6 +228,124 @@
             z-index: 1;
         }
 
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .glowing-border {
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe) border-box;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        .hover-effect {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 242, 254, 0.5), 
+                rgba(79, 172, 254, 0.5));
+            opacity: 0;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .glitch-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://xatimg.com/image/i74pTbUCUQzf.jpg');
+            background-size: cover;
+            opacity: 0;
+            mix-blend-mode: hard-light;
+            animation: glitch 0.3s linear infinite;
+        }
+
+        /* Efectos de hover y animaciones */
+        .card-container:hover {
+            transform: rotateY(180deg) scale(1.05);
+        }
+
+        .card:hover .hover-effect {
+            opacity: 1;
+        }
+
+        .card:hover .profile-img {
+            transform: scale(1.1) translateZ(20px);
+        }
+
+        .card:hover .glitch-effect {
+            opacity: 0.1;
+        }
+
+        /* Terminal */
+        .terminal {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(33, 138, 242, 0.3);
+            z-index: 100;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .terminal-content {
+            font-family: monospace;
+            color: #00f2fe;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            margin: 5px 0;
+        }
+
+        .terminal-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .terminal-input input {
+            background: transparent;
+            border: none;
+            color: #00f2fe;
+            font-family: monospace;
+            width: 100%;
+            outline: none;
+        }
         /* Animaciones */
         @keyframes space {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
@@ -268,12 +380,12 @@
             80% { transform: translate(5px, -5px); }
             100% { transform: translate(0); }
         }
+
         /* Media Queries */
         @media (max-width: 768px) {
             .card-container {
                 width: 250px;
                 height: 350px;
-                touch-action: none;
             }
 
             .floating-menu {
@@ -381,12 +493,19 @@
 
     <!-- Scripts -->
     <script>
-        // Función para manejar efectos de la tarjeta
-        function handleCardEffects() {
-            const card = document.querySelector('.card-container');
-            
-            // Función para actualizar la rotación
-            function updateRotation(x, y, rect) {
+        // Detectar si es dispositivo móvil
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
+
+        // Solo aplicar efectos de mouse si no es dispositivo móvil
+        if (!isMobileDevice()) {
+            document.querySelector('.card-container').addEventListener('mousemove', (e) => {
+                const card = e.currentTarget;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
@@ -394,70 +513,12 @@
                 const rotateY = -(x - centerX) / 10;
                 
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            }
-
-            // Eventos para dispositivos de escritorio (mouse)
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                updateRotation(x, y, rect);
             });
 
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-
-            // Eventos para dispositivos móviles (touch)
-            card.addEventListener('touchmove', (e) => {
-                e.preventDefault(); // Prevenir el scroll
-                const rect = card.getBoundingClientRect();
-                const touch = e.touches[0];
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
-                updateRotation(x, y, rect);
-            });
-
-            card.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                const rect = card.getBoundingClientRect();
-                const touch = e.touches[0];
-                const x = touch.clientX - rect.left;
-                const y = touch.clientY - rect.top;
-                updateRotation(x, y, rect);
-            });
-
-            card.addEventListener('touchend', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-
-            // Evento para girar la tarjeta al tocar (tap)
-            let lastTap = 0;
-            card.addEventListener('touchstart', (e) => {
-                const currentTime = new Date().getTime();
-                const tapLength = currentTime - lastTap;
-                
-                if (tapLength < 500 && tapLength > 0) {
-                    // Doble tap detectado
-                    card.style.transform = 'rotateY(180deg) scale(1.05)';
-                    setTimeout(() => {
-                        card.style.transform = 'rotateY(0) scale(1)';
-                    }, 1500);
-                }
-                lastTap = currentTime;
+            document.querySelector('.card-container').addEventListener('mouseleave', (e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
         }
-
-        // Detectar si es dispositivo móvil
-        function isMobileDevice() {
-            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-        }
-
-        // Inicializar efectos
-        document.addEventListener('DOMContentLoaded', () => {
-            handleCardEffects();
-            createParticles();
-        });
 
         // Efecto de partículas avanzadas
         function createParticles() {
@@ -520,6 +581,9 @@
 
             drawParticles();
         }
+
+        // Inicializar efectos
+        createParticles();
 
         // Ajustar canvas al redimensionar ventana
         window.addEventListener('resize', () => {
