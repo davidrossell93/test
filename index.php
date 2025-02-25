@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargar Contenido a Través de Proxy</title>
+    <title>XD</title>
 </head>
 <body>
 
