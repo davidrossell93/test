@@ -1,51 +1,69 @@
-<?php
-// index.php
-
-// Si se hace una solicitud a este archivo, se extraerá el contenido de la URL
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // URL que deseas extraer
-    $url = 'https://xat.com/content/web/R00207/box/embed.html';
-
-    // Inicializa cURL
-    $ch = curl_init();
-
-    // Configura las opciones de cURL
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Para seguir redirecciones
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'); // User-Agent
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Tiempo de espera para la conexión
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language: en-US,en;q=0.5',
-    ]);
-
-    // Ejecuta la solicitud
-    $response = curl_exec($ch);
-
-    // Verifica si hubo un error
-    if (curl_errno($ch)) {
-        echo 'Error: ' . curl_error($ch); // Muestra el error de cURL
-    } else {
-        // Muestra el contenido obtenido
-        echo $response;
-    }
-
-    // Cierra la conexión cURL
-    curl_close($ch);
-    exit; // Termina la ejecución del script aquí
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contenido de Xat</title>
+    <title>¡Asombroso!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            font-size: 4em;
+            margin: 0;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 5px;
+            background: #ff6f61;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff4f40;
+        }
+    </style>
 </head>
 <body>
-    <h2>Contenido de Xat</h2>
-    <iframe src="<?php echo $_SERVER['PHP_SELF']; ?>" title="Xat Content" width="100%" height="600px" style="border:none;"></iframe>
+    <div>
+        <h1>¡Bienvenido a la Experiencia Asombrosa!</h1>
+        <button onclick="alert('¡Eres increíble!')">Haz clic aquí</button>
+    </div>
+    <script>
+        document.body.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))`;
+        });
+    </script>
 </body>
 </html>
