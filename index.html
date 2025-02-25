@@ -3,58 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Asombroso!</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <title>Cubo 3D</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
             margin: 0;
             overflow: hidden;
             background: #000;
-            color: white;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        h1 {
-            font-size: 4em;
-            margin: 0;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 1.5em;
-            border: none;
-            border-radius: 5px;
-            background: #ff6f61;
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #ff4f40;
-        }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            button {
-                font-size: 1.2em;
-            }
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div>
-    </div>
     <script>
-        particlesJS.load('particles-js', 'https://cdn.rawgit.com/VincentGarreau/particles.js/master/particles.json', function() {
-            console.log('callback - particles.js config loaded');
-        });
-        // Código para Three.js
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
