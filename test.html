@@ -3,36 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargar Contenido Dinámicamente</title>
+    <title>Redirección a Xat</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
-        #content {
+        iframe {
             width: 100%;
             height: 100%;
-            overflow: auto;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <div id="content">Cargando...</div>
-    
-    <script>
-        fetch('https://xat.com/content/web/R00207/box/embed.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('content').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('content').innerHTML = 'Error al cargar el contenido.';
-                console.error('Error:', error);
-            });
-    </script>
+    <iframe src="https://xat.com/content/web/R00207/box/embed.html" title="Xat Chat"></iframe>
 </body>
 </html>
