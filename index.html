@@ -26,7 +26,7 @@
         const geometry = new THREE.BoxGeometry(3, 3, 3); // Aumentar tamaño
         const textureLoader = new THREE.TextureLoader();
         const material = new THREE.MeshStandardMaterial({
-            map: textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/wood.jpg') // Cambiar textura
+            map: textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg') // Cambiar textura
         });
         const cube = new THREE.Mesh(geometry, material);
         cube.castShadow = true; // El cubo proyecta sombra
@@ -39,20 +39,8 @@
         pointLight.position.set(10, 10, 10);
         pointLight.castShadow = true; // Luz proyecta sombra
         scene.add(pointLight);
-        const pointLight2 = new THREE.PointLight(0xffffff, 1, 100);
-        pointLight2.position.set(-10, -10, -10);
-        pointLight2.castShadow = true; // Luz proyecta sombra
-        scene.add(pointLight2);
-        const pointLight3 = new THREE.PointLight(0xffffff, 1, 100);
-        pointLight3.position.set(0, 10, 0);
-        pointLight3.castShadow = true; // Luz proyecta sombra
-        scene.add(pointLight3);
-        const pointLight4 = new THREE.PointLight(0xffffff, 1, 100);
-        pointLight4.position.set(0, 0, 10);
-        pointLight4.castShadow = true; // Luz proyecta sombra
-        scene.add(pointLight4);
 
-        camera.position.z = 5;
+        camera.position.z = 10; // Asegurarse de que la cámara esté alejada para ver el cubo
 
         // Controlar la rotación del cubo
         let mouseX = 0;
