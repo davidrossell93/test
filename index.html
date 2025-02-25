@@ -3,22 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contenido Dinámico</title>
+    <title>Bienvenido</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.location.href = 'https://xat.com/content/web/R00207/box/embed.html';
+        });
+    </script>
 </head>
 <body>
-    <h2>Contenido de Xat</h2>
-    <div id="content">Cargando...</div>
-
-    <script>
-        fetch('https://api.ejemplo.com/obtener-contenido') // Cambia esta URL a la API que necesites
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('content').innerHTML = data.contenido; // Ajusta según la estructura de la respuesta
-            })
-            .catch(error => {
-                document.getElementById('content').innerHTML = 'Error al cargar el contenido.';
-                console.error('Error:', error);
-            });
-    </script>
+    <h2>Hola y chao.</h2>
 </body>
 </html>
