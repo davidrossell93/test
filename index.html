@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cubo 3D</title>
+    <title>Cubo 3D Mejorado</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
@@ -21,17 +21,38 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        // Crear un cubo con textura
         const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const textureLoader = new THREE.TextureLoader();
+        const material = new THREE.MeshStandardMaterial({
+            map: textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg')
+        });
         const cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
 
+        // Agregar iluminación
+        const ambientLight = new THREE.AmbientLight(0x404040); // luz suave
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+
         camera.position.z = 5;
+
+        // Controlar la rotación del cubo
+        let mouseX = 0;
+        let mouseY = 0;
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
 
         function animate() {
             requestAnimationFrame(animate);
             cube.rotation.x += 0.01;
             cube.rotation.y += 0.01;
+            cube.rotation.x += mouseY * 0.1;
+            cube.rotation.y += mouseX * 0.1;
             renderer.render(scene, camera);
         }
 
