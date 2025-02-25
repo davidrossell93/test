@@ -8,9 +8,9 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Para seguir redirecciones
 $response = curl_exec($ch);
 
 if (curl_errno($ch)) {
-    echo 'Error: ' . curl_error($ch);
+    echo 'Error: ' . curl_error($ch); // Muestra el error de cURL
 } else {
-    echo $response;
+    echo $response; // Muestra el contenido obtenido
 }
 
 curl_close($ch);
