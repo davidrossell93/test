@@ -19,15 +19,17 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true; // Habilitar sombras
         document.body.appendChild(renderer.domElement);
 
-        // Crear un cubo con textura
-        const geometry = new THREE.BoxGeometry();
+        // Crear un cubo más grande con textura
+        const geometry = new THREE.BoxGeometry(3, 3, 3); // Aumentar tamaño
         const textureLoader = new THREE.TextureLoader();
         const material = new THREE.MeshStandardMaterial({
-            map: textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg')
+            map: textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/wood.jpg') // Cambiar textura
         });
         const cube = new THREE.Mesh(geometry, material);
+        cube.castShadow = true; // El cubo proyecta sombra
         scene.add(cube);
 
         // Agregar iluminación
@@ -35,7 +37,20 @@
         scene.add(ambientLight);
         const pointLight = new THREE.PointLight(0xffffff, 1, 100);
         pointLight.position.set(10, 10, 10);
+        pointLight.castShadow = true; // Luz proyecta sombra
         scene.add(pointLight);
+        const pointLight2 = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight2.position.set(-10, -10, -10);
+        pointLight2.castShadow = true; // Luz proyecta sombra
+        scene.add(pointLight2);
+        const pointLight3 = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight3.position.set(0, 10, 0);
+        pointLight3.castShadow = true; // Luz proyecta sombra
+        scene.add(pointLight3);
+        const pointLight4 = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight4.position.set(0, 0, 10);
+        pointLight4.castShadow = true; // Luz proyecta sombra
+        scene.add(pointLight4);
 
         camera.position.z = 5;
 
