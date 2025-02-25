@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Asombroso!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            background: #000;
             color: white;
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -16,27 +18,10 @@
             align-items: center;
             height: 100vh;
             text-align: center;
-            animation: fadeIn 2s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         h1 {
             font-size: 4em;
             margin: 0;
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-30px);
-            }
-            60% {
-                transform: translateY(-15px);
-            }
         }
         button {
             padding: 10px 20px;
@@ -51,18 +36,52 @@
         button:hover {
             background: #ff4f40;
         }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            button {
+                font-size: 1.2em;
+            }
+        }
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <div>
         <h1>¡Bienvenido a la Experiencia Asombrosa!</h1>
         <button onclick="alert('¡Eres increíble!')">Haz clic aquí</button>
     </div>
     <script>
-        document.body.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))`;
+        particlesJS.load('particles-js', 'https://cdn.rawgit.com/VincentGarreau/particles.js/master/particles.json', function() {
+            console.log('callback - particles.js config loaded');
+        });
+        // Código para Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
 </body>
