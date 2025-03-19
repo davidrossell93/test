@@ -1,287 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Text Sparks - DAVID</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>David Animation</title>
+
+  <!-- Fuente Heebo -->
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@900&display=swap" rel="stylesheet">
+  <!-- Splitting.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+
   <style>
-    body, html {
+    :root {
+      --duration: 6s;
+      --wave-duration: calc(var(--duration) * 0.25);
+      --text-in-delay: calc(var(--duration) * 0.275);
+      --text-in-duration: calc(var(--duration) * 0.1);
+      --easing: cubic-bezier(0.5, 0, 0.5, 1);
+      --dot-color: #ffd950;
+      --dot-color-dark: #977a12;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
       margin: 0;
       padding: 0;
-      font-size: 0;
+      background: #060506;
+      color: white;
+      font-family: "Heebo", sans-serif;
+      overflow: hidden;
     }
-    div {
-      display: none;
+
+    body {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
-    canvas {
-      width: 100vw;
-      height: 100vh;
+
+    .container {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .container > * {
+      grid-area: 1 / 1;
+    }
+
+    .title {
+      font-size: 10vmin;
+      margin: 0;
+    }
+
+    .title .char {
+      --delay: calc(var(--text-in-delay) + (0.25s * (1 - var(--distance-percent))));
+      animation: text-in var(--text-in-duration) var(--easing) var(--delay) backwards;
+      transform-origin: center 1em;
+    }
+
+    @keyframes text-in {
+      0% {
+        opacity: 0;
+        transform: translateX(calc(-0.4em * var(--char-offset))) scale(0);
+      }
+      90% {
+        transform: translateX(0em) scale(1.1);
+      }
+    }
+
+    .char[data-char="t"],
+    .char[data-char="i"] {
+      visibility: hidden;
+    }
+
+    .char[data-char="t"]::before,
+    .char[data-char="i"]::before {
+      animation: text-squish var(--duration) var(--easing) forwards;
+      visibility: visible;
+      transform-origin: center 1em;
+      content: attr(data-char);
+      display: inline-block;
+    }
+
+    .char[data-char="t"] {
+      --squish-scale: 0.6;
+      --squish-y: 10%;
+    }
+
+    .char[data-char="i"] {
+      --squish-scale: 0.9;
+      --squish-y: 5%;
+    }
+
+    @keyframes text-squish {
+      47.5%, 52.5% { transform: none; }
+      50% {
+        transform: translateY(calc(var(--squish-y) * 1)) scaleY(calc(var(--squish-scale) * 1));
+      }
+    }
+
+    .title .char:last-child {
+      animation: text-in var(--text-in-duration) var(--easing) var(--delay) backwards,
+                 text-bonk var(--duration) var(--easing) forwards;
+    }
+
+    @keyframes text-bonk {
+      80%, 85%, to { transform: none; }
+      82% { transform: translateX(-20%); }
+    }
+
+    .dot {
+      font-size: 5vmin;
+      width: 1em;
+      height: 1em;
+      animation: dot var(--duration) var(--easing) both;
+    }
+
+    .dot-inner {
+      animation: dot-inner var(--duration) var(--easing) both;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .dot-inner > * {
+      grid-area: 1 / 1;
+    }
+
+    .dot-wave {
+      width: 200%;
+      height: 200%;
+      fill: var(--dot-color);
+      animation: wave-in var(--wave-duration) var(--easing);
+      --offset-x: -110%;
+    }
+
+    @keyframes wave-in {
+      0% { transform: translateY(100%) translateX(var(--offset-x)); }
+      70% { transform: translateY(30%) translateX(0%); }
+    }
+
+    .dot-wave.background {
+      fill: var(--dot-color-dark);
+      animation-duration: calc(0.95 * var(--wave-duration));
+      --offset-x: 110%;
+    }
+
+    @keyframes dot {
+      from { opacity: 0; transform: scale(3); }
+      10% { opacity: 1; transform: scale(3); }
+      15% { transform: scale(3) translateY(0.5em) scaleY(1.5); }
+      20% { transform: scale(1) translateY(-300%); }
+      30% { transform: translateY(1em) scaleY(0.5); }
+      40% { transform: translateY(-400%); }
+      50% { transform: translateY(-1em); }
+      53% { transform: translateY(-300%); }
+      56% { transform: translateY(-1em); }
+      59% { transform: translateY(-200%); }
+      62% { transform: translateY(1em); }
+      80%, 90%, to { transform: translateY(1em); }
+    }
+
+    @keyframes dot-inner {
+      from, 45% { transform: none; }
+      70% {
+        transform: translateX(6em);
+        animation-timing-function: cubic-bezier(0.5, 0, 1, 0);
+      }
+      80% {
+        transform: translateX(4.3em);
+        animation-timing-function: var(--easing);
+      }
+      83%, to { transform: translateX(4.4em); }
+    }
+
+    body:not([data-play]) *,
+    body:not([data-play]) *::before,
+    body:not([data-play]) *::after {
+      visibility: hidden;
+      animation: none !important;
     }
   </style>
 </head>
 <body>
-  <!--
-    very bad single thread performance.... 
-    sorry AMD users - will fix that soon!!! :D
-  -->
-  <div>
-    <ul data-time="3000">
-      <li data-hue="197">D</li>
-      <li data-hue="0">A</li>
-      <li data-hue="197">V</li>
-      <li data-hue="197">I</li>
-      <li data-hue="45">D</li>
-    </ul>
+  <div class="container">
+    <h1 class="title" data-splitting>David</h1>
+
+    <div class="dot">
+      <div class="dot-inner">
+        <svg class="dot-wave background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+          <path d="M799.09 90s11.04 0 0 0c-80.714 0-79.621-90-200-90-120.377 0-118.607 90-200 90-81.391 0-81.215-90-200-90C80.308 0 78.68 89.29-.91 90c-6.946.062 0 0 0 0v510h800V90z" />
+        </svg>
+        <svg class="dot-wave foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+          <path d="M799.09 90s11.04 0 0 0c-80.714 0-79.621-90-200-90-120.377 0-118.607 90-200 90-81.391 0-81.215-90-200-90C80.308 0 78.68 89.29-.91 90c-6.946.062 0 0 0 0v510h800V90z" />
+        </svg>
+      </div>
+    </div>
   </div>
-  <canvas></canvas>
 
+  <!-- Splitting.js -->
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
   <script>
-    const newParticlesPerFrame = 50;
+    console.clear();
+    Splitting();
 
-    const color = (hsl, o) => `hsla(${hsl.h | 0}, ${hsl.s}%, ${hsl.l}%, ${o})`;
+    // Replay animation on click
+    let el = document.body;
+    el.addEventListener("click", function () {
+      el.hidden = true;
+      requestAnimationFrame(() => {
+        el.hidden = false;
+      });
+    });
 
-    class TextSparks {
-      constructor() {
-        this.opa = 0;
-        this.tick = 0;
-        this.drawCB = this.draw.bind(this);
-        this.mask = null;
-        this.canvas = document.querySelector('canvas');
-        this.engine = this.canvas.getContext('2d');
-        this.maskTick = 0;
-        this.nextMaskCb = this.nextMask.bind(this);
-        this.maskCache = [];
-        this.resize();
-        this.fetchData();
-        this.buildStackCache();
-        this.particleMap = new Map();
-        window.addEventListener('resize', () => this.resize());
-        requestAnimationFrame(this.drawCB);
-      }
-
-      buildStackCache() {
-        this.maskCache = this.stack.map(stack => this.buildTextMask(stack.texts));
-      }
-
-      fetchData() {
-        this.stackId = -1;
-        this.stack = [...document.querySelectorAll('div > ul')].map(ul => ({
-          ticks: 0.05 * (ul.getAttribute('data-time') || 0),
-          fadeIn: ul.hasAttribute('data-fade-in') ? 50 / Number(ul.getAttribute('data-fade-in')) : 0,
-          fadeOut: ul.hasAttribute('data-fade-out') ? 50 / Number(ul.getAttribute('data-fade-out')) : 0,
-          texts: [...ul.querySelectorAll('li')].map(li => ({
-            text: li.innerHTML.trim(),
-            hsl: {
-              h: li.getAttribute('data-hue') || 0,
-              s: li.getAttribute('data-saturation') || 100,
-              l: li.getAttribute('data-lightness') || 50
-            }
-          }))
-        }));
-      }
-
-      resize() {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
-      }
-
-      buildTextMask(texts) {
-        const mask = [];
-        const textAll = texts.map(t => t.text).join('');
-        const size = 0.8;
-        const width = 200;
-        const height = width / (this.width / this.height) | 0;
-        const baseFontSize = 20;
-
-        const canvas = document.createElement('canvas');
-        const engine = canvas.getContext('2d');
-        canvas.width = width;
-        canvas.height = height;
-        engine.fillStyle = '#000';
-        engine.font = `bold ${baseFontSize}px Arial`;
-        const m = engine.measureText(textAll);
-        const rel = m.width / (width * size);
-        const fSize = Math.min(height * 0.8, baseFontSize / rel | 0);
-        engine.font = `bold ${fSize}px Arial`;
-        const fontWidth = engine.measureText(textAll).width;
-        const leftStart = (width - fontWidth) / 2;
-        const bot = height / 2 + fSize * 0.35;
-        let left = leftStart;
-
-        texts.forEach(textStack => {
-          engine.clearRect(0, 0, width, height);
-          engine.fillText(textStack.text, left, bot);
-          left += engine.measureText(textStack.text).width;
-          const data = engine.getImageData(0, 0, width, height);
-          const subStack = [];
-
-          for (let i = 0, max = data.width * data.height; i < max; i++) {
-            if (data.data[i * 4 + 3]) {
-              subStack.push({
-                x: (i % data.width) / data.width,
-                y: (i / data.width | 0) / data.height,
-                o: Math.random(),
-                t: Math.random()
-              });
-            }
-          }
-
-          mask.push({
-            hsl: textStack.hsl,
-            s: subStack
-          });
-        });
-
-        return mask;
-      }
-
-      createNewParticle() {
-        for (let i = 0; i < newParticlesPerFrame; i++) {
-          let main = Math.random() * this.mask.length | 0;
-          let subMask = this.mask[main];
-          let maskElement = subMask.s[Math.random() * subMask.s.length | 0];
-          if (subMask && maskElement) {
-            let particle = {
-              x: maskElement.x,
-              y: maskElement.y,
-              hsl: subMask.hsl,
-              c: this.prepareParticle
-            };
-            this.particleMap.set(particle, particle);
-          }
-        }
-      }
-
-      clear() {
-        this.engine.fillStyle = '#111';
-        this.engine.fillRect(0, 0, this.width, this.height);
-      }
-
-      randFromList(...rands) {
-        return rands.reduce((a, b) => a + b, 0) / rands.length;
-      }
-
-      prepareParticle(particle) {
-        const r1 = Math.random(), r2 = Math.random(), r3 = Math.random();
-        const rad = r3 * Math.PI * 2;
-        particle.x += (-0.5 + r1) / 300;
-        particle.y += (-0.5 + r2) / 300;
-        particle.si = 1 + Math.random() * 4 | 0;
-        particle.s = 0.003 + this.randFromList(r1, r2) / 10;
-        particle.l = 0;
-        particle.mx = Math.cos(rad) * (particle.s / (r1 < 0.05 ? 10 : 400));
-        particle.my = Math.sin(rad) * (particle.s / (r1 < 0.05 ? 10 : 400));
-        particle.c = this.drawParticle;
-      }
-
-      drawParticle(particle) {
-        if (particle.l >= 1) {
-          particle.c = null;
-          return;
-        }
-        particle.l += particle.s;
-        particle.x += particle.mx;
-        particle.y += particle.my;
-        this.engine.fillStyle = color(particle.hsl, this.opa * Math.sin(particle.l * Math.PI));
-        this.engine.fillRect(particle.x * this.width, particle.y * this.height, particle.si, particle.si);
-      }
-
-      renderParticles() {
-        this.particleMap.forEach(p => {
-          p.c.call(this, p);
-          if (!p.c) this.particleMap.delete(p);
-        });
-      }
-
-      drawStatic() {
-        let i = 0;
-        const step = 0.01;
-        this.mask.forEach(subMask => {
-          subMask.s.forEach(pos => {
-            i++;
-            this.engine.fillStyle = color(subMask.hsl, (1 + Math.cos(pos.x * 5 * pos.y * 5 + this.tick / 10)) / 2 * this.opa * pos.t * 0.5);
-            this.engine.fillRect(pos.x * this.width, pos.y * this.height, this.width / 150, this.width / 150);
-            if (i % 2) return;
-            pos.o += step;
-            const opa = Math.max(0, Math.sin(pos.o * Math.PI * 2));
-            const padding = opa * this.width / 200;
-            this.engine.fillStyle = color(subMask.hsl, this.opa * opa * 0.2);
-            if (pos.t < 0.5) {
-              this.engine.beginPath();
-              this.engine.arc(pos.x * this.width, pos.y * this.height, this.width / 500 + padding, 0, Math.PI * 2);
-              this.engine.fill();
-            } else {
-              this.engine.fillRect(pos.x * this.width - padding, pos.y * this.height - padding, this.width / 150 + padding * 2, this.width / 150 + padding * 2);
-            }
-          });
-        });
-      }
-
-      draw() {
-        this.tick++;
-        this.nextMaskCb();
-        this.createNewParticle();
-        this.clear();
-        this.engine.globalCompositeOperation = 'lighter';
-        this.drawStatic();
-        this.renderParticles();
-        this.engine.globalCompositeOperation = 'source-over';
-        requestAnimationFrame(this.drawCB);
-      }
-
-      fadeInMask() {
-        this.opa += this.stack[this.stackId].fadeIn;
-        if (this.opa >= 1) {
-          this.opa = 1;
-          this.afterFadeIn();
-        }
-      }
-
-      afterFadeIn() {
-        this.opa = 1;
-        if (this.stack[this.stackId].ticks) {
-          this.maskTick = 0;
-          this.nextMaskCb = this.tickMask.bind(this);
-        } else {
-          this.nextMaskCb = () => {};
-        }
-      }
-
-      fadeOutMask() {
-        this.opa -= this.stack[this.stackId].fadeOut;
-        if (this.opa <= 0) this.afterFadeOut();
-      }
-
-      afterFadeOut() {
-        this.opa = 0;
-        this.nextMaskCb = this.nextMask.bind(this);
-      }
-
-      tickMask() {
-        this.maskTick++;
-        if (this.maskTick >= this.stack[this.stackId].ticks) {
-          if (this.stack[this.stackId].fadeOut) {
-            this.nextMaskCb = this.fadeOutMask.bind(this);
-          } else {
-            this.afterFadeOut();
-          }
-        }
-      }
-
-      nextMask() {
-        this.stackId++;
-        if (this.stackId >= this.stack.length) this.stackId = 0;
-        this.mask = this.maskCache[this.stackId];
-        if (this.stack[this.stackId].fadeIn) {
-          this.nextMaskCb = this.fadeInMask.bind(this);
-        } else {
-          this.opa = 1;
-        }
-      }
-    }
-
-    new TextSparks();
+    // Sync helper
+    requestAnimationFrame(() => {
+      document.body.dataset.play = true;
+    });
   </script>
 </body>
 </html>
