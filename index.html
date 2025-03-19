@@ -3,129 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impact Name Intro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <title>Intro Impacto - DAVID</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet" />
   <style>
-    html, body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+    html, body {
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, #0a0a0a, #000000);
+      background: radial-gradient(ellipse at center, #000000 0%, #111111 100%);
       overflow: hidden;
-      font-family: 'Orbitron', sans-serif;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .container {
       position: relative;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
-    .orb {
+    .energy-orb {
       position: absolute;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, #ffc107, #ff9800);
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
-      animation: explode 2s ease-out forwards;
-      z-index: 1;
+      background: radial-gradient(circle, #ffcc00, #ff6600);
+      box-shadow: 0 0 60px 30px rgba(255, 153, 0, 0.5);
+      animation: pulse 2s ease-in-out infinite, launch 3s ease forwards;
+      z-index: 2;
     }
 
-    @keyframes explode {
-      0% {
-        transform: scale(0);
-        opacity: 0;
-      }
-      50% {
-        transform: scale(1.2);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(8);
-        opacity: 0.1;
-        filter: blur(60px);
-      }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.6; }
+    }
+
+    @keyframes launch {
+      0% { transform: scale(1) translateY(0); opacity: 1; }
+      50% { transform: scale(2) translateY(-150px); opacity: 0.8; }
+      100% { transform: scale(5) translateY(-300px); opacity: 0; }
     }
 
     .name {
-      color: white;
-      font-size: 6vw;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: 12vw;
+      color: #ffffff;
+      letter-spacing: 10px;
+      text-shadow: 0 0 20px #ff6600, 0 0 40px #ffcc00;
       opacity: 0;
-      z-index: 2;
-      animation: appearLetters 3s ease-out 1.5s forwards;
-    }
-
-    @keyframes appearLetters {
-      0% {
-        transform: scale(0.6);
-        opacity: 0;
-        letter-spacing: 1em;
-        filter: blur(10px);
-      }
-      60% {
-        transform: scale(1.1);
-        filter: blur(1px);
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-        letter-spacing: 0.2em;
-        filter: blur(0);
-      }
-    }
-
-    .shine {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0), rgba(255,255,255,0.2));
-      transform: translate(-50%, -50%) rotate(25deg);
-      animation: shineMove 4s ease-in-out infinite;
+      animation: revealText 4s ease forwards 2s;
       z-index: 3;
     }
 
-    @keyframes shineMove {
-      0% {
-        transform: translate(-50%, -50%) rotate(25deg) translateX(-100%);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(25deg) translateX(100%);
-      }
+    @keyframes revealText {
+      0% { opacity: 0; transform: scale(0.8) rotateX(90deg); }
+      60% { opacity: 1; transform: scale(1.05) rotateX(0); }
+      100% { transform: scale(1) rotateX(0); }
     }
 
     .flare {
       position: absolute;
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, #ffffff88, transparent);
-      border-radius: 50%;
-      animation: flareEffect 4s ease-in-out infinite;
-      z-index: 4;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+      filter: blur(60px);
+      animation: flareMove 8s ease-in-out infinite;
     }
 
-    @keyframes flareEffect {
-      0% { opacity: 0; transform: scale(0.5) translateY(0); }
-      50% { opacity: 1; transform: scale(1.5) translateY(-80px); }
-      100% { opacity: 0; transform: scale(0.5) translateY(0); }
+    @keyframes flareMove {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-40%, -60%) scale(1.2); }
+      100% { transform: translate(-50%, -50%) scale(1); }
     }
 
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(2px 2px at var(--x, 50%) var(--y, 50%), #ffcc00, transparent);
+      background-repeat: repeat;
+      animation: moveParticles 30s linear infinite;
+      opacity: 0.2;
+    }
+
+    @keyframes moveParticles {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="orb"></div>
+    <div class="particles"></div>
     <div class="flare"></div>
-    <div class="shine"></div>
-    <div class="name">DAVID</div>
+    <div class="energy-orb"></div>
+    <h1 class="name">DAVID</h1>
   </div>
 </body>
 </html>
