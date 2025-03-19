@@ -1,128 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intro David</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impact Name Intro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Montserrat:wght@600&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
-    body {
+    html, body {
       margin: 0;
-      background: radial-gradient(circle, #0c0c0c, #000000);
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #0a0a0a, #000000);
       overflow: hidden;
+      font-family: 'Orbitron', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
 
     .container {
-      display: flex;
-      gap: 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 80px;
-      font-weight: 700;
-      color: #ffffff;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .letter {
-      opacity: 0;
-      transform: scale(0.2) rotateX(90deg);
-      animation: appear 1s forwards;
-      text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
-    }
-
-    .dot {
+    .orb {
       position: absolute;
-      top: 50%;
-      left: -100px;
-      width: 30px;
-      height: 30px;
-      background: radial-gradient(circle, #ffcc00, #ff6600);
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #ffc107, #ff9800);
       border-radius: 50%;
-      transform: translateY(-50%);
-      animation: moveDot 3s forwards ease-in-out;
-      box-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
+      animation: explode 2s ease-out forwards;
+      z-index: 1;
     }
 
-    .dot::after {
-      content: "";
+    @keyframes explode {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(8);
+        opacity: 0.1;
+        filter: blur(60px);
+      }
+    }
+
+    .name {
+      color: white;
+      font-size: 6vw;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      z-index: 2;
+      animation: appearLetters 3s ease-out 1.5s forwards;
+    }
+
+    @keyframes appearLetters {
+      0% {
+        transform: scale(0.6);
+        opacity: 0;
+        letter-spacing: 1em;
+        filter: blur(10px);
+      }
+      60% {
+        transform: scale(1.1);
+        filter: blur(1px);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        letter-spacing: 0.2em;
+        filter: blur(0);
+      }
+    }
+
+    .shine {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 204, 0, 0.3);
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0), rgba(255,255,255,0.2));
+      transform: translate(-50%, -50%) rotate(25deg);
+      animation: shineMove 4s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    @keyframes shineMove {
+      0% {
+        transform: translate(-50%, -50%) rotate(25deg) translateX(-100%);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(25deg) translateX(100%);
+      }
+    }
+
+    .flare {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #ffffff88, transparent);
       border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: pulse 1.5s infinite;
+      animation: flareEffect 4s ease-in-out infinite;
+      z-index: 4;
     }
 
-    @keyframes moveDot {
-      0% {
-        left: -100px;
-        opacity: 1;
-      }
-      20% {
-        left: 20px;
-      }
-      40% {
-        left: 60px;
-      }
-      60% {
-        left: 120px;
-      }
-      80% {
-        left: 180px;
-      }
-      100% {
-        left: 250px;
-        opacity: 0;
-      }
+    @keyframes flareEffect {
+      0% { opacity: 0; transform: scale(0.5) translateY(0); }
+      50% { opacity: 1; transform: scale(1.5) translateY(-80px); }
+      100% { opacity: 0; transform: scale(0.5) translateY(0); }
     }
-
-    @keyframes appear {
-      0% {
-        opacity: 0;
-        transform: scale(0.2) rotateX(90deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotateX(0deg);
-      }
-    }
-
-    @keyframes pulse {
-      0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-      }
-      100% {
-        width: 80px;
-        height: 80px;
-        opacity: 0;
-      }
-    }
-
-    .letter:nth-child(2) { animation-delay: 1s; }
-    .letter:nth-child(3) { animation-delay: 1.3s; }
-    .letter:nth-child(4) { animation-delay: 1.6s; }
-    .letter:nth-child(5) { animation-delay: 1.9s; }
-    .letter:nth-child(6) { animation-delay: 2.2s; }
 
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="dot"></div>
-    <span class="letter">D</span>
-    <span class="letter">A</span>
-    <span class="letter">V</span>
-    <span class="letter">I</span>
-    <span class="letter">D</span>
+    <div class="orb"></div>
+    <div class="flare"></div>
+    <div class="shine"></div>
+    <div class="name">DAVID</div>
   </div>
 </body>
 </html>
